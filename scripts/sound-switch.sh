@@ -29,4 +29,3 @@ case "$arg" in
 		echo "שׂ"
 		;;
 esac
-
