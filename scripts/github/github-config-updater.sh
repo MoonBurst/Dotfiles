@@ -5,7 +5,6 @@ git pull
 git add scripts/
 
 git add .config/dunst/
-git add .config/geany/
 git add .config/hypr/
 git add .config/MangoHud/
 git add .config/rofi/
