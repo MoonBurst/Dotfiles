@@ -1,0 +1,142 @@
+{
+     "layer": "top", // Waybar at top layer
+     "position": "top", // Waybar position (top|bottom|left|right)
+   // "height": 26, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+   // "spacing": 5, // Gaps between modules (4px)
+    // Choose the order of the modules
+   
+   
+   
+    "modules-left": [
+    "wlr/workspaces", 
+    "idle_inhibitor"
+    ],
+	
+	
+	
+	"modules-center": [
+	"mpris"
+	],
+	
+	
+	"modules-right": [
+	"custom/pipewire",
+	"pulseaudio", 
+	"network",
+	"cpu", 
+	"memory", 
+	"temperature", 
+	"clock", 
+	"tray"
+	],
+	
+//  Modules configuration
+
+
+"wlr/workspaces": {
+//       "disable-scroll": true,
+  "all-outputs": false,
+        "format": "{name}: {icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "1": "",
+             "2": "",
+             "3": "",
+             "4": "",
+             "5": "",
+             "urgent": "",
+             "focused": "",
+             "default": ""
+         }
+ },
+     
+"mpris": {
+			"format": "{artist} - {title}",
+			"min-length": 40,
+			"max-length": 40,
+            "exec": "playerctl-waybar",
+            "return-type": "json",
+            "on-click": "playerctl --player audacious play-pause",
+            "on-click-right": "playerctl stop",
+            "on-click-middle": "music-start",
+            "on-scroll-down": "playerctl previous",
+            "on-scroll-up": "playerctl next",
+},
+        
+"idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+},
+
+"tray": {
+        "icon-size": 21,
+        "spacing": 1
+},
+    
+"clock": {
+    "exec": "date +'%d. %b %H:%M'",
+    "interval": 5
+},
+
+"cpu": {
+        "format": "CPU {usage}%",
+        "tooltip": true
+},
+    
+"memory": {
+        "format": "RAM {avail}G "
+},
+    
+"temperature": {
+        // "thermal-zone": 2,
+         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C {icon}",
+        "format": "{icon} {temperatureC}C",
+        "format-icons": ["", "", ""]
+},
+
+"network": {
+	"min-length": 25,
+	"interface": "e*", // This is the magic line
+    "format-wifi": " {bandwidthDowbBits}  {bandwidthUpBits} ",
+    "format-ethernet": "{bandwidthDownBits}   | {bandwidthUpBits} ",
+    "format-linked": "(No IP)",
+    "format-disconnected": "",
+  //  "on-click": "alacritty -e nmtui",
+    "tooltip": false,
+    "interval": 1
+},
+
+"pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+},
+    
+"custom/pipewire": {
+    "tooltip": false,
+    "max-length": 6,
+//    "exec": "$HOME/.config/waybar/scripts/pipewire.sh",
+    "on-click": "pavucontrol",
+    "on-click-right": "qpwgraph"
+}
+}
