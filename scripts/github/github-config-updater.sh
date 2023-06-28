@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+git pull
+
+git add scripts/
 
 git add .config/dunst/
 git add .config/geany/colorschemes/
@@ -11,7 +14,7 @@ git add .config/waybar/
 
 if [[ -n $(git status -s) ]]; then
     echo "Changes found. Pushing changes..."
-    git add -A && git commit -m 'update' && git push
+     git commit -m 'update' && git push
 else
     echo "No changes found. Skip pushing."
 fi
