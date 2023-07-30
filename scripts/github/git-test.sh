@@ -13,10 +13,13 @@ echo "Checking for newer files online first"
 git pull
 
 # Below command will backup everything inside the project folder
-cd ..
-cd ..
-cd .config/
-git add rofi/
+git add  scripts/
+git add .config/dunst/
+git add .config/hypr/
+git add .config/MangoHud/
+git add .config/rofi/
+git add .config/swayidle/
+git add .config/waybar/
 # Give a comment to the commit if you want
 echo "####################################"
 echo "Write your commit comment!"

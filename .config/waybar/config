@@ -62,6 +62,7 @@
             "on-click-middle": "music-start",
             "on-scroll-down": "playerctl previous",
             "on-scroll-up": "playerctl next",
+            "interval": 1
 },
         
 "idle_inhibitor": {
@@ -88,7 +89,9 @@
 },
     
 "memory": {
-        "format": "RAM {avail}G "
+        "format": "RAM {avail}G ",
+        "on-click": "gnome-system-monitor",
+        "interval": 1
 },
     
 "temperature": {
@@ -107,7 +110,7 @@
     "format-ethernet": "{bandwidthDownBits}   | {bandwidthUpBits} ",
     "format-linked": "(No IP)",
     "format-disconnected": "",
-  //  "on-click": "alacritty -e nmtui",
+    "on-click": "konsole -e nmtui",
     "tooltip": false,
     "interval": 1
 },
