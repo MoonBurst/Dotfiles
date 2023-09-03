@@ -24,7 +24,7 @@ git add .config/waybar/
 echo "####################################"
 echo "Write your commit comment!"
 echo "####################################"
-echo update
+
 read input
 
 # Committing to the local repository with a message containing the time details and commit text

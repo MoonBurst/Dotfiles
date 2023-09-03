@@ -9,8 +9,9 @@
    
    
     "modules-left": [
-    "wlr/workspaces", 
-    "idle_inhibitor"
+    "hyprland/workspaces", 
+    "idle_inhibitor",
+    "custom/beats"
     ],
 	
 	
@@ -34,7 +35,7 @@
 //  Modules configuration
 
 
-"wlr/workspaces": {
+"hyprland/workspaces": {
 //       "disable-scroll": true,
   "all-outputs": false,
         "format": "{name}: {icon}",
@@ -73,6 +74,12 @@
         }
 },
 
+"custom/beats": {
+     "format": "Beats{}",
+      "exec": "~/.config/waybar/modules/beats.sh",
+      "interval": 5
+    },
+    
 "tray": {
         "icon-size": 21,
         "spacing": 1

@@ -54,7 +54,7 @@ box {
 }
 
 /* Primary monitor configuration */
-window.DP-1,
+window.DP-3,
 #notifications,
 #workspaces {
   margin: 0.5em;
@@ -100,6 +100,15 @@ window.DP-1,
 #keyboard-state,
 #mpd {
   padding: 0 1em;
+}
+#custom-beats {
+  padding: 0 0.5em;
+  margin: 0.5em;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: bold;
+  background-color: @surface0;
+  border: 2px solid @surface1;  
 }
 
 #custom-notification,
