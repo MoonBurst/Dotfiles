@@ -1,1 +1,18 @@
 Adding directory: /home/moonburst/scripts/
+Adding directory: /home/moonburst/.config/dunst/
+Adding directory: /home/moonburst/.config/hypr/
+Adding directory: /home/moonburst/.config/MangoHud/
+Adding directory: /home/moonburst/.config/fuzzel/
+Adding directory: /home/moonburst/.config/sway/
+Adding directory: /home/moonburst/.config/swayidle/
+Adding directory: /home/moonburst/.config/waybar/
+Directory /.zshrc does not exist, skipping...
+Added: /home/moonburst/.config/MangoHud/MangoHud.conf
+[main b257ff7] Automated sync: Sat Mar 22 11:30:00 AM CDT 2025
+ 3 files changed, 2 insertions(+), 43 deletions(-)
+ create mode 100644 scripts/github-updater.log
+ delete mode 100755 scripts/github/git-test.sh
+ rename scripts/github/{github-config-updater.sh => github-updater.sh} (98%)
+/usr/share/git/credential/gnome-keyring/git-credential-gnome-keyring store: line 1: /usr/share/git/credential/gnome-keyring/git-credential-gnome-keyring: No such file or directory
+To https://github.com/MoonBurst/Dotfiles.git
+   4162ebe..b257ff7  main -> main
