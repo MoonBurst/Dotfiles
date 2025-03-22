@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# List of directories to sync
+# List of directories and files to sync
 DIRECTORIES=(
   "$HOME/scripts/"
   "$HOME/.config/dunst/"
@@ -14,28 +14,20 @@ DIRECTORIES=(
   "$HOME/.zshrc"
 )
 
-# Navigate to the repository root (assume it's still in ~/scripts/)
+# Navigate to the repository root
 cd "$HOME/scripts/" || { echo "Error: ~/scripts/ directory not found"; exit 1; }
 
-# Loop through directories and ensure all files, including ignored ones, are staged
+# Loop through directories and files to add them
 for DIR in "${DIRECTORIES[@]}"; do
-  if [ -d "$DIR" ]; then
-    echo "Adding directory: $DIR"
+  if [ -e "$DIR" ]; then  # Check if the path exists
+    echo "Adding: $DIR"
     git add --force "$DIR"
   else
-    echo "Directory $DIR does not exist, skipping..."
+    echo "Path $DIR does not exist, skipping..."
   fi
 done
 
-# Additional check for MangoHud.conf
-if [ -f "$HOME/.config/MangoHud/MangoHud.conf" ]; then
-  git add --force "$HOME/.config/MangoHud/MangoHud.conf"
-  echo "Added: $HOME/.config/MangoHud/MangoHud.conf"
-else
-  echo "MangoHud.conf not found in $HOME/.config/MangoHud/"
-fi
-
-# Commit changes with a timestamp message
+# Commit changes with a timestamp
 git commit -m "Automated sync: $(date)"
 
 # Push changes to GitHub
