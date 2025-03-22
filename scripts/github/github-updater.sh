@@ -10,7 +10,7 @@ DIRECTORIES=(
   "$HOME/.config/sway/"
   "$HOME/.config/swayidle/"
   "$HOME/.config/waybar/"
-  "$HOMR/.zshrc"
+  "$HOME/.zshrc"
 )
 
 # Navigate to the repository root (assume it's still in ~/scripts/)
