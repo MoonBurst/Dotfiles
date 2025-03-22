@@ -10,6 +10,7 @@ DIRECTORIES=(
   "$HOME/.config/sway/"
   "$HOME/.config/swayidle/"
   "$HOME/.config/waybar/"
+  "$HOME/.config/Trolltech.conf"
   "$HOME/.zshrc"
 )
 
