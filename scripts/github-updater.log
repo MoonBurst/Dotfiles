@@ -17,3 +17,18 @@ Added: /home/moonburst/.config/MangoHud/MangoHud.conf
 To https://github.com/MoonBurst/Dotfiles.git
    4162ebe..b257ff7  main -> main
 Adding directory: /home/moonburst/scripts/
+Adding directory: /home/moonburst/.config/dunst/
+Adding directory: /home/moonburst/.config/hypr/
+Adding directory: /home/moonburst/.config/MangoHud/
+Adding directory: /home/moonburst/.config/fuzzel/
+Adding directory: /home/moonburst/.config/sway/
+Adding directory: /home/moonburst/.config/swayidle/
+Adding directory: /home/moonburst/.config/waybar/
+Directory /home/moonburst/.config/Trolltech.conf does not exist, skipping...
+Directory /home/moonburst/.zshrc does not exist, skipping...
+Added: /home/moonburst/.config/MangoHud/MangoHud.conf
+[main 2478774] Automated sync: Sat Mar 22 12:00:00 PM CDT 2025
+ 1 file changed, 1 insertion(+)
+/usr/share/git/credential/gnome-keyring/git-credential-gnome-keyring store: line 1: /usr/share/git/credential/gnome-keyring/git-credential-gnome-keyring: No such file or directory
+To https://github.com/MoonBurst/Dotfiles.git
+   4da1141..2478774  main -> main
