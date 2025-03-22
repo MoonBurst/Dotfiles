@@ -16,3 +16,4 @@ Added: /home/moonburst/.config/MangoHud/MangoHud.conf
 /usr/share/git/credential/gnome-keyring/git-credential-gnome-keyring store: line 1: /usr/share/git/credential/gnome-keyring/git-credential-gnome-keyring: No such file or directory
 To https://github.com/MoonBurst/Dotfiles.git
    4162ebe..b257ff7  main -> main
+Adding directory: /home/moonburst/scripts/
