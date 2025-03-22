@@ -16,3 +16,18 @@ Adding: /home/moonburst/.zshrc
 To https://github.com/MoonBurst/Dotfiles.git
    d812e63..7732e20  main -> main
 Adding: /home/moonburst/scripts/
+Adding: /home/moonburst/.config/dunst/
+Adding: /home/moonburst/.config/hypr/
+Adding: /home/moonburst/.config/MangoHud/
+Adding: /home/moonburst/.config/fuzzel/
+Adding: /home/moonburst/.config/sway/
+Adding: /home/moonburst/.config/swayidle/
+Adding: /home/moonburst/.config/waybar/
+Adding: /home/moonburst/.config/Trolltech.conf
+Adding: /home/moonburst/.zshrc
+[main 2b4fec7] Automated sync: Sat Mar 22 01:00:00 PM CDT 2025
+ 1 file changed, 17 insertions(+)
+
+** (process:371169): CRITICAL **: 13:00:00.899: could not connect to Secret Service: Cannot autolaunch D-Bus without X11 $DISPLAY
+fatal: could not read Username for 'https://github.com': No such device or address
+Adding: /home/moonburst/scripts/
