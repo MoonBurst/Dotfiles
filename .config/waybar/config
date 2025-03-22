@@ -9,9 +9,13 @@
    
    
     "modules-left": [
+//    "sway/workspaces", 
     "hyprland/workspaces", 
     "idle_inhibitor",
-    "custom/beats"
+//    "custom/beats",
+    "clock#day",
+    "custom/weather",
+    "custom/updates"
     ],
 	
 	
@@ -22,48 +26,76 @@
 	
 	
 	"modules-right": [
-	"custom/pipewire",
+//	"custom/pipewire",
 	"pulseaudio", 
 	"network",
-	"cpu", 
-	"temperature", 
-	"memory", 
+//	"cpu", 
+//	"temperature",
+
+	"custom/cpu_readout",
+	"custom/gpu_readout",
+	"custom/ram_readout",
+//	"memory", 
 	"clock", 
 	"tray"
+
 	],
 	
 //  Modules configuration
-
-
 "hyprland/workspaces": {
-//       "disable-scroll": true,
-  "all-outputs": false,
+		"disable-scroll": true,
+		"all-outputs": false,
         "format": "{name}: {icon}",
         "on-click": "activate",
         "format-icons": {
             "1": "",
-             "2": "",
-             "3": "",
-             "4": "",
-             "5": "",
-             "urgent": "",
-             "focused": "",
-             "default": ""
-         }
+            "2": "",
+            "3": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+         },
+           "persistent-workspaces": {
+            "*": [1,2,3,4,5,6,7,8,9],
+            "HDMI-A-2": [1,4,7],
+            "DP-2": [2,5,8],
+            "HDMI-A-1": [3,6,9]
+        },
+          "sort-by-number": true
  },
-     
+
+
+"custom/weather": {
+  "exec": "~/.config/waybar/modules/temp.sh",
+  "interval": 600
+},
+
+
+"custom/updates": {
+       "format": "{} {icon}",
+       "return-type": "json",
+       "format-icons": {
+           "has-updates": "󱍷",
+           "updated": "󰂪 "
+       },
+       "exec-if": "which waybar-module-pacman-updates",
+       "exec": "waybar-module-pacman-updates"
+},
+
+
+
 "mpris": {
-			"format": "{artist} - {title}",
-			"min-length": 40,
-			"max-length": 40,
+			"format": "{title}",
+			"min-length": 30,
+			"max-length": 30,
             "exec": "playerctl-waybar",
             "return-type": "json",
             "on-click": "playerctl --player audacious play-pause",
-            "on-click-right": "playerctl stop",
-            "on-click-middle": "music-start",
-            "on-scroll-down": "playerctl previous",
-            "on-scroll-up": "playerctl next",
-            "interval": 1
+//            "on-click-middle": "music-start",
+//            "on-scroll-down": "playerctl previous",
+//            "on-scroll-up": "playerctl next",
+            "interval": 5,
+            "ignored-players": ["firefox"]
 },
         
 "idle_inhibitor": {
@@ -79,17 +111,41 @@
       "exec": "~/.config/waybar/modules/beats.sh",
       "interval": 5
     },
-    
 "tray": {
-        "icon-size": 21,
-        "spacing": 1
+    "icon-size": 21,
+    "spacing": 1,
 },
-    
 "clock": {
-    "exec": "date +'%d. %b %H:%M'",
-    "interval": 5
+  "format": "{:%I:%M:%p}",
+   "interval": 5
+},
+"clock#day": {
+    "format": "{:%a %d %b}",
+    "min-length": 15,
+	"max-length": 150,
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "on-scroll": -1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
 },
 
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+  
 "cpu": {
         "format": "CPU {usage}%",
         "tooltip": true
@@ -107,7 +163,21 @@
         "critical-threshold": 80,
         "format-critical": "{temperatureC}°C {icon}",
         "format": "{icon} {temperatureC}C",
-        "format-icons": ["", "", ""]
+        "format-icons": ["", "", "CPU"]
+},
+"custom/cpu_readout": {
+  "type": "custom/script",
+    "exec": "~/.config/waybar/modules/cpu_readout.sh",
+    "interval": 1
+},
+
+"custom/gpu_readout": {
+  "exec": "~/.config/waybar/modules/gpu_readout.sh",
+  "interval": 1
+},
+"custom/ram_readout": {
+  "exec": "~/.config/waybar/modules/ram_readout.sh",
+  "interval": 1
 },
 
 "network": {
@@ -117,7 +187,7 @@
     "format-ethernet": "{bandwidthDownBits}   | {bandwidthUpBits} ",
     "format-linked": "(No IP)",
     "format-disconnected": "",
-    "on-click": "konsole -e nmtui",
+    "on-click": "nm-connection-editor",
     "tooltip": false,
     "interval": 1
 },
@@ -139,14 +209,13 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol-qt"
 },
     
 "custom/pipewire": {
-    "tooltip": false,
-    "max-length": 6,
-//    "exec": "$HOME/.config/waybar/scripts/pipewire.sh",
-    "on-click": "pavucontrol",
-    "on-click-right": "qpwgraph"
-}
+  "exec": "~/.config/waybar/modules/pipewire.sh",
+  "interval": 1
+
+},
+
 }

@@ -9,11 +9,10 @@
 * Global configuration for theme 
 * */
 * {
-  font-family: Helvetica;
-  font-size: 16px;
+  font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif,pso_font;
+  font-size: 15px;
   border-radius: 0.75em;
 }
-
 window#waybar {
   border: 2px solid @surface1;
   background: @theme_base_color;
@@ -22,24 +21,19 @@ window#waybar {
   transition-property: background-color;
   transition-duration: 0.5s;
 }
-
 window#waybar.hidden {
   opacity: 0.2;
 }
-
 tooltip {
   background: @base;
   border: 1px solid @blue;
 }
-
 tooltip label {
   color: white;
 }
-
 label:focus {
   background-color: #000000;
 }
-
 button {
   /* Use box-shadow instead of border so the text isn't offset */
   box-shadow: inset 0 -3px transparent;
@@ -55,65 +49,47 @@ box {
 
 /* Primary monitor configuration */
 window.DP-3,
-#notifications,
-#workspaces {
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: @peach;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;
-}
 
 
 /* Wlr/workspaces configuration  */
-#window,
-#workspaces {
-  color: @peach;
-}
 
 #workspaces label {
-  font-size: 20px;
+  font-size: 15px;
 }
-
 #workspaces button {
   padding: 0 0.5em;
   background-color: @surface0;
   color: @text;
   margin: 0.25em;
 }
-
 #workspaces button.active {
   /* background-color: @surface2; */
   color: @blue;
 }
-
 #workspaces button.urgent {
   background-color: @red;
   color: @text;
 }
 
 /* Add spacing for right side modules */
+#custom-wayves,
+#notifications,
+#workspaces, 
+#window,
+#workspaces,
 #tray,
+#taskbar,
 #user,
 #keyboard-state,
-#mpd {
-  padding: 0 1em;
-}
-#custom-beats {
-  padding: 0 0.5em;
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;  
-}
-
+#taskbar,
+#mpd,
+#custom-beats,
 #custom-notification,
 #custom-updates,
 #custom-github,
+#custom-cpu_readout,
+#custom-gpu_readout,
+#custom-ram_readout,
 #custom-weather,
 #idle_inhibitor,
 #wireplumber,
@@ -122,7 +98,23 @@ window.DP-3,
 #memory,
 #temperature,
 #disk,
-#network {
+#network,
+#idle_inhibitor,
+#mpris,
+#tray,
+#cpu, 
+#memory,
+#custom-pipewire,
+#temperature,
+#custom-github,
+#custom-updates,
+#custom-pipewire.muted,
+#pulseaudio.muted, 
+#pulseaudio,
+#keyboard-state, 
+#clock,
+#custom-separator-left, 
+#custom-separator-right {
   padding: 0 0.5em;
   margin: 0.5em;
   padding-left: 5px;
@@ -131,145 +123,28 @@ window.DP-3,
   background-color: @surface0;
   border: 2px solid @surface1;  
 }
-#idle_inhibitor {
-  padding: 0 0.5em;
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 10px;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;  
-}
-#mpris {
-  padding: 0 0.5em;
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;  
-}
-#tray {
-  padding: 0 0.5em;
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;  
-}
-
 #custom-updates.updated {
   padding-left: 0;
   padding-right: 1em;
 }
-
-/* Unique colors for modules */
-#cpu {
-  color: @red;
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;
-}
-
-#memory {
-  color: @yellow;
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;
-}
-
-#user {
-  color: @blue;
-}
-
-#custom-pipewire {
-  color: @green;
-}
-
-#temperature {
-  color: @green;
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;  
-}
-
-#custom-github {
-  color: @blue;
-}
-
 #custom-updates {
   color: @red;
 }
-
+#user {
+  color: @blue;
+}
 #network.disconnected {
   background-color: #f53c3c;
 }
-
-#custom-pipewire.muted,
-#pulseaudio.muted {
-  background-color: #90b1b1;
-  color: #2a5c45;
-  padding: 0 0.5em;
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;  
-}
-#pulseaudio {
-  background-color: #90b1b1;
-  padding: 0 0.5em;
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;  
-}
-
-
 #temperature.critical {
   background-color: #eb4d4b;
 }
-
-#keyboard-state {
-  padding: 0 0px;
-  min-width: 16px;
-  color: @mauve;
-}
-
 #keyboard-state > label {
   padding: 0 5px;
 }
-
 #keyboard-state > label.locked {
   background: rgba(0, 0, 0, 0.2);
 }
-
-#clock {
-  font-size: 16px;
-  font-weight: 900;
-  padding: 0 0.5em;
-  margin: 0.5em;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-weight: bold;
-  background-color: @surface0;
-  border: 2px solid @surface1;  
-}  
-
-
 /* Custom styling for the logout icon on end */
 #custom-wlogout {
   font-size: 1.75em;
@@ -277,15 +152,6 @@ window.DP-3,
   padding-left: 0.5em;
   color: @blue;
 }
-
-#custom-separator-right,
-#custom-separator-left {
-  font-size: 20px;
-  padding-left: 1em;
-  padding-right: 1em;
-  color: @text;
-}
-
 @keyframes blink {
   to {
     background-color: #ffffff;

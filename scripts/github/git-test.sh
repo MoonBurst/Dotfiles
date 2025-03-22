@@ -17,19 +17,21 @@ git add  scripts/
 git add .config/dunst/
 git add .config/hypr/
 git add .config/MangoHud/
-git add .config/rofi/
+git add .config/fuzzel/
+git add .config/sway/
 git add .config/swayidle/
 git add .config/waybar/
 # Give a comment to the commit if you want
-echo "####################################"
-echo "Write your commit comment!"
-echo "####################################"
+#echo "####################################"
+#echo "Write your commit comment!"
+#echo "####################################"
 
-read input
+#read input
 
 # Committing to the local repository with a message containing the time details and commit text
 
-git commit -m "$input"
+#git commit -m "$input"
+git commit -m "update"
 
 # Push the local files to github
 

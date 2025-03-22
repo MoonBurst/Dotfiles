@@ -1,0 +1,16 @@
+# This is a reminder file format guide.
+# Format: MM-DD:DaysInAdvance"Message"+ (Use + for urgent messages)
+01-09:7"Luster's Birthday"+
+03-24:5"test"
+01-01:3"New Year's Day"
+02-14:7"Valentine's Day"
+03-17:1"St. Patrick's Day"
+04-01:1"April Fool's Day"
+07-04:1"Independence Day"
+10-31:7"Halloween"
+11-23:7"Thanksgiving Day"
+12-25:7"Christmas Day"
+12-31:3"New Year's Eve"
+11-28:3"Black Friday"
+05-11:3"Mother's Day"+
+06-15:3"Father's Day"+
