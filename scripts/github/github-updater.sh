@@ -11,6 +11,7 @@ DIRECTORIES=(
   "$HOME/.config/swayidle/"
   "$HOME/.config/waybar/"
   "$HOME/.config/Trolltech.conf"
+  "$HOME/.config/satty/"
   "$HOME/.zshrc"
 )
 

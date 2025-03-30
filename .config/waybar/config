@@ -9,7 +9,7 @@
    
    
     "modules-left": [
-//    "sway/workspaces", 
+    "sway/workspaces", 
     "hyprland/workspaces", 
     "idle_inhibitor",
 //    "custom/beats",
@@ -42,15 +42,11 @@
 	],
 	
 //  Modules configuration
-"hyprland/workspaces": {
+"sway/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": false,
-        "format": "{name}: {icon}",
-        "on-click": "activate",
+        "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -85,18 +81,16 @@
 
 
 "mpris": {
-			"format": "{title}",
-			"min-length": 30,
-			"max-length": 30,
-            "exec": "playerctl-waybar",
-            "return-type": "json",
-            "on-click": "playerctl --player audacious play-pause",
-//            "on-click-middle": "music-start",
-//            "on-scroll-down": "playerctl previous",
-//            "on-scroll-up": "playerctl next",
-            "interval": 5,
-            "ignored-players": ["firefox"]
+    "format": "{title}",
+    "min-length": 30,
+    "max-length": 30,
+    "exec": "playerctl --player=audacious metadata --format '{{title}}'",
+    "return-type": "json",
+    "on-click": "playerctl --player=audacious play-pause",
+    "interval": 1,
+    "ignored-players": ["firefox"]
 },
+
         
 "idle_inhibitor": {
         "format": "{icon}",

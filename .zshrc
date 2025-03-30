@@ -66,13 +66,14 @@ autoload edit-command-line; zle -N edit-command-line
 
 # Environment variables set everywhere
 export EDITOR="nano"
-export TERMINAL="ghostty"
+export TERMINAL="kitty"
 
 # For QT Themes
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 export PATH="/home/moonburst/.local/share/fnm:$PATH"
-
+#steam fix?
+export DXVK_FRAME_RATE=0
 
 # Needs to be at or near the end of file
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -92,5 +93,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Needs to be at the end of file
 #eval "$(starship init zsh)"
+#sleep 0.15
 fastfetch --logo /home/moonburst/.config/fastfetch/test.png
 PROMPT="%{$fg[yellow]%}[%D{%T}] %{$fg[blue]%}moonburst@archlinux: %{$fg[green]%}%~%{$reset_color%} $"
