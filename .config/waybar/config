@@ -26,6 +26,7 @@
 	
 	
 	"modules-right": [
+	"clock",
 //	"custom/pipewire",
 	"pulseaudio", 
 	"network",
@@ -36,9 +37,7 @@
 	"custom/gpu_readout",
 	"custom/ram_readout",
 //	"memory", 
-	"clock", 
 	"tray"
-
 	],
 	
 //  Modules configuration
@@ -188,12 +187,14 @@
 
 "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format": "{volume}% {icon} ",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": "",
+        /* The following lines are commented out to disable microphone levels:
         "format-source": "{volume}% ",
         "format-source-muted": "",
+        */
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -205,6 +206,7 @@
         },
         "on-click": "pavucontrol-qt"
 },
+
     
 "custom/pipewire": {
   "exec": "~/.config/waybar/modules/pipewire.sh",

@@ -12,6 +12,7 @@ DIRECTORIES=(
   "$HOME/.config/waybar/"
   "$HOME/.config/Trolltech.conf"
   "$HOME/.config/satty/"
+  "$HOME/.config/sherlock/"
   "$HOME/.zshrc"
 )
 

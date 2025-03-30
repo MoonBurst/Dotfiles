@@ -48,7 +48,7 @@ box {
 }
 
 /* Primary monitor configuration */
-window.DP-3,
+window.DP-2,
 
 
 /* Wlr/workspaces configuration  */
@@ -77,7 +77,6 @@ window.DP-3,
 #workspaces, 
 #window,
 #workspaces,
-#tray,
 #taskbar,
 #user,
 #keyboard-state,

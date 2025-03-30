@@ -1,9 +1,9 @@
 # This is a reminder file format guide.
 # Format: MM-DD:DaysInAdvance"Message"+ (Use + for urgent messages)
 01-09:7"Luster's Birthday"+
-07:13:7"Sonata's Birthday"+
+07-13:7"Sonata's Birthday"+
 12-05:7"Silver's Birthday"+
-03-24:5"test"
+
 01-01:3"New Year's Day"
 02-14:7"Valentine's Day"
 03-17:1"St. Patrick's Day"
