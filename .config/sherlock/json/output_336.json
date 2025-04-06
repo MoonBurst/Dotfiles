@@ -1,0 +1,8 @@
+{
+    "title": "Clipboard Entry 336",
+    "description": "Binary data and thumbnail for entry 336.",
+    "icon": "/home/moonburst/.config/sherlock/icons/thumbnail_336.png",
+    "result": "Processed result for entry 336.",
+    "method": "cliphist decode",
+    "field": "clipboard"
+}

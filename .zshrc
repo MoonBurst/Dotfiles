@@ -93,6 +93,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Needs to be at the end of file
 #eval "$(starship init zsh)"
-#sleep 0.15
-fastfetch --logo /home/moonburst/.config/fastfetch/test.png
+fastfetch --logo /home/moonburst/.config/fastfetch/test.png --logo-width 55 --logo-height 20
+
 PROMPT="%{$fg[yellow]%}[%D{%T}] %{$fg[blue]%}moonburst@archlinux: %{$fg[green]%}%~%{$reset_color%} $"

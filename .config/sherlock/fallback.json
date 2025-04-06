@@ -11,13 +11,26 @@
         "priority": 1,
         "home": true
     },
+
+
     {
-        "name": "Clipboard",
-        "type": "clipboard-execution",
-        "args": {},
-        "priority": 1,
-        "home": true
+    "name": "Kill Process",
+    "alias": "kill",
+    "type": "process",
+    "args": { },
+    "priority": 6,
+    "home": false
     },
+
+     {
+        "name": "Audacious",
+        "type": "audio_sink",
+        "args": { },
+        "async": true,
+        "priority": 1,
+        "home": true,
+        "spawn_focus": false
+    },  
     {
         "name": "Calculator",
         "type": "calculation",
@@ -59,11 +72,12 @@
         "args": {"commands": {
             "Shutdown": {"icon": "system-shutdown", "exec": "systemctl poweroff", "search_string": "Poweroff;Shutdown"},
             "Sleep": {"icon": "system-suspend", "exec": "systemctl suspend", "search_string": "Sleep;"},
-            "Lock": {"icon": "system-lock-screen", "exec": "systemctl suspend & swaylock", "search_string": "Lock Screen;"},
+            "Lock": {"icon": "system-lock-screen", "exec": "swaylock -f -c 030303", "search_string": "Lock Screen;"},
             "Reboot": {"icon": "system-reboot", "exec": "systemctl reboot", "search_string": "reboot"}
         }},
         "priority": 4
     },
+    
     {
         "name": "OBS Studio",
         "alias": "",
@@ -111,8 +125,22 @@
         "on_return": "next",
         "async": true, 
         "args": {"icon": "wikipedia", "exec": "/home/moonburst/.config/sherlock/scripts/sherlock-wiki", "exec-args": "'{keyword}'"},
-        "priority": 0 
-    }
+        "priority": 0,
+        "shortcut": false
+    },
+    
+{
+    "title": "Test Thumbnail Entry",
+    "description": "This is a test entry with a thumbnail.",
+    "icon": "~/.config/sherlock/icons/thumbnail_231.png",
+    "result": "Testing thumbnail display in Sherlock."
+}
+
+
+
+    
+    
+    
 ]
 
 
