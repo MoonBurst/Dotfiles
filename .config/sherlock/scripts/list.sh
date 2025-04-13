@@ -1,54 +1,50 @@
 #!/bin/bash
 
-# Paths for Sherlock integration
-ICON_DIR="$HOME/.config/sherlock/icons"
+# Path for JSON metadata
 JSON_DIR="$HOME/.config/sherlock/json"
-mkdir -p "$ICON_DIR" "$JSON_DIR"
+mkdir -p "$JSON_DIR"
 
-# Function to process valid clipboard entries
-process_entry() {
-    local index="$1"
+# Initialize an empty JSON array
+json_array="["
 
-    # Decode binary data to a temporary file
-    cliphist decode "$index" > /tmp/original_image_${index}.png
-
-    # Check if the decoded file is a valid PNG
-    if file /tmp/original_image_${index}.png | grep -q "PNG image"; then
-        # Create thumbnail only if it doesn't already exist
-        if [[ ! -f "$ICON_DIR/thumbnail_${index}.png" ]]; then
-            magick /tmp/original_image_${index}.png -resize 128x128 "$ICON_DIR/thumbnail_${index}.png"
-        fi
-
-        # Generate JSON for Sherlock
-        cat << EOF > "$JSON_DIR/output_${index}.json"
-{
-    "title": "Clipboard Entry $index",
-    "description": "Binary data and thumbnail for entry $index.",
-    "icon": "$ICON_DIR/thumbnail_${index}.png",
-    "result": "Processed result for entry $index.",
-    "method": "cliphist decode",
-    "field": "clipboard"
-}
-EOF
-        echo "$index"  # Output numeric ID to stdout
-    else
-        echo "Entry $index does not contain a valid image. Skipping." >&2
-    fi
-
-    # Clean up temporary files
-    rm -f /tmp/original_image_${index}.png
-}
-
-# Main loop to process valid clipboard entries
+# Process clipboard entries
 cliphist list | while read -r line; do
-    if echo "$line" | grep -q "binary data"; then
-        index=$(echo "$line" | awk '{print $1}')
-        if [[ "$index" =~ ^[0-9]+$ ]]; then
-            process_entry "$index"
-        else
-            echo "Skipping line with invalid ID: $line" >&2
+    if [[ "$line" == *"��"* ]]; then
+        # Check if the line contains binary data (possible image)
+        id=$(echo "$line" | awk -F '\t' '{print $1}')
+        if [[ -n "$id" ]]; then
+            # Decode the binary data
+            decoded_output=$(cliphist decode "$id" 2>/dev/null)
+
+            if [[ -n "$decoded_output" ]]; then
+                # Add decoded binary data as base64-encoded string
+                binary_data=$(echo "$decoded_output" | base64)
+
+                # Format as a JSON object
+                json_array+="{
+                    \"title\": \"Clipboard Entry $id\",
+                    \"result\": \"Processed result for entry $id\",
+                    \"binary\": \"$binary_data\"
+                },"
+            fi
         fi
     else
-        echo "Skipping line without binary data: $line" >&2
+        # Add entries without binary data
+        json_array+="{
+            \"title\": \"$line\",
+            \"result\": \"$line\"
+        },"
     fi
 done
+
+# Remove the trailing comma from the JSON array
+json_array=${json_array%,}
+
+# Close the JSON array
+json_array+="]"
+
+# Save the JSON to a file
+echo "$json_array" > "$JSON_DIR/output.json"
+
+# Print the JSON
+cat "$JSON_DIR/output.json"

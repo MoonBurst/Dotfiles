@@ -3669,3 +3669,57 @@ Adding: /home/moonburst/.zshrc
 To https://github.com/MoonBurst/Dotfiles.git
    2a5cce0..19c39db  main -> main
 Adding: /home/moonburst/scripts/
+Adding: /home/moonburst/.config/dunst/
+Adding: /home/moonburst/.config/hypr/
+Adding: /home/moonburst/.config/MangoHud/
+Adding: /home/moonburst/.config/fuzzel/
+Adding: /home/moonburst/.config/sway/
+Adding: /home/moonburst/.config/swayidle/
+Adding: /home/moonburst/.config/waybar/
+Adding: /home/moonburst/.config/Trolltech.conf
+Adding: /home/moonburst/.config/satty/
+Adding: /home/moonburst/.config/sherlock/
+Adding: /home/moonburst/.zshrc
+[main cb6ff98] Automated sync: Sun Apr  6 12:00:00 AM CDT 2025
+ 44 files changed, 19841 insertions(+), 47 deletions(-)
+ create mode 100644 .config/sherlock/icons/thumbnail_286.png
+ create mode 100644 .config/sherlock/icons/thumbnail_301.png
+ create mode 100644 .config/sherlock/icons/thumbnail_308.png
+ create mode 100644 .config/sherlock/icons/thumbnail_319.png
+ create mode 100644 .config/sherlock/icons/thumbnail_336.png
+ create mode 100644 .config/sherlock/json/output_198.json
+ create mode 100644 .config/sherlock/json/output_200.json
+ create mode 100644 .config/sherlock/json/output_201.json
+ create mode 100644 .config/sherlock/json/output_202.json
+ create mode 100644 .config/sherlock/json/output_209.json
+ create mode 100644 .config/sherlock/json/output_231.json
+ create mode 100644 .config/sherlock/json/output_233.json
+ create mode 100644 .config/sherlock/json/output_234.json
+ create mode 100644 .config/sherlock/json/output_235.json
+ create mode 100644 .config/sherlock/json/output_244.json
+ create mode 100644 .config/sherlock/json/output_260.json
+ create mode 100644 .config/sherlock/json/output_261.json
+ create mode 100644 .config/sherlock/json/output_262.json
+ create mode 100644 .config/sherlock/json/output_263.json
+ create mode 100644 .config/sherlock/json/output_264.json
+ create mode 100644 .config/sherlock/json/output_265.json
+ create mode 100644 .config/sherlock/json/output_266.json
+ create mode 100644 .config/sherlock/json/output_267.json
+ create mode 100644 .config/sherlock/json/output_271.json
+ create mode 100644 .config/sherlock/json/output_273.json
+ create mode 100644 .config/sherlock/json/output_274.json
+ create mode 100644 .config/sherlock/json/output_275.json
+ create mode 100644 .config/sherlock/json/output_276.json
+ create mode 100644 .config/sherlock/json/output_279.json
+ create mode 100644 .config/sherlock/json/output_286.json
+ create mode 100644 .config/sherlock/json/output_301.json
+ create mode 100644 .config/sherlock/json/output_308.json
+ create mode 100644 .config/sherlock/json/output_319.json
+ create mode 100644 .config/sherlock/json/output_336.json
+ create mode 100755 .config/sherlock/scripts/list.py
+ create mode 100755 .config/sherlock/scripts/list.sh
+
+** (process:3049448): CRITICAL **: 00:00:01.270: store failed: Cannot autolaunch D-Bus without X11 $DISPLAY
+To https://github.com/MoonBurst/Dotfiles.git
+   ebda119..cb6ff98  main -> main
+Adding: /home/moonburst/scripts/

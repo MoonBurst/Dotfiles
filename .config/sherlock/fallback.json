@@ -128,19 +128,14 @@
         "priority": 0,
         "shortcut": false
     },
-    
 {
-    "title": "Test Thumbnail Entry",
-    "description": "This is a test entry with a thumbnail.",
-    "icon": "~/.config/sherlock/icons/thumbnail_231.png",
-    "result": "Testing thumbnail display in Sherlock."
+    "title": "Clipboard Entry $index",
+    "description": "Binary data and thumbnail for entry $index.",
+    "icon": "$ICON_DIR/${index}.png",
+    "result": "Processed result for entry $index.",
+    "method": "cliphist decode",
+    "field": "clipboard"
 }
-
-
-
-    
-    
-    
 ]
 
 
