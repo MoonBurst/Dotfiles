@@ -1,8 +1,0 @@
-{
-    "title": "Clipboard Entry 393",
-    "description": "Binary data and thumbnail for entry 393.",
-    "icon": "/home/moonburst/.config/sherlock/icons/393.png",
-    "result": "Processed result for entry 393.",
-    "method": "cliphist decode",
-    "field": "clipboard"
-}
