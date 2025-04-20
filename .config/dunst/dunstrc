@@ -23,7 +23,7 @@ enable_posix_regex=true
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    #width = 500
+    width = (400, 400)  # Minimum width of 100, maximum of 500
 
     # The maximum height of a single notification, excluding the frame.
     #height = 100

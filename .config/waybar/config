@@ -10,12 +10,13 @@
    
     "modules-left": [
     "sway/workspaces", 
-    "hyprland/workspaces", 
+//    "hyprland/workspaces", 
     "idle_inhibitor",
 //    "custom/beats",
     "clock#day",
     "custom/weather",
     "custom/updates",
+    "custom/dunst",
     "mpris"
     ],
 	
@@ -220,4 +221,10 @@
 
 },
 
+
+
+"custom/dunst": {
+  "exec": "~/.config/waybar/modules/dunst_count.sh",
+  "interval": 5
+}
 }

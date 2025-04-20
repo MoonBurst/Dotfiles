@@ -3798,3 +3798,4 @@ Adding: /home/moonburst/.zshrc
 ** (process:4121970): CRITICAL **: 00:00:01.108: store failed: Cannot autolaunch D-Bus without X11 $DISPLAY
 To https://github.com/MoonBurst/Dotfiles.git
    cb6ff98..973f24c  main -> main
+Adding: /home/moonburst/scripts/

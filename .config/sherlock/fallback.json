@@ -77,7 +77,22 @@
         }},
         "priority": 4
     },
-    
+{
+    "name": "Dunst Toggle",
+    "alias": "dunst",
+    "type": "command",
+    "args": {
+        "commands": {
+            "Toggle Notifications": {
+                "icon": "notifications",
+                "exec": "dunstctl set-paused toggle",
+                "search_string": "dunst;toggle;notifications;notify;"
+            }
+        }
+    },
+    "priority": 5
+},
+
     {
         "name": "OBS Studio",
         "alias": "",
@@ -127,15 +142,8 @@
         "args": {"icon": "wikipedia", "exec": "/home/moonburst/.config/sherlock/scripts/sherlock-wiki", "exec-args": "'{keyword}'"},
         "priority": 0,
         "shortcut": false
-    },
-{
-    "title": "Clipboard Entry $index",
-    "description": "Binary data and thumbnail for entry $index.",
-    "icon": "$ICON_DIR/${index}.png",
-    "result": "Processed result for entry $index.",
-    "method": "cliphist decode",
-    "field": "clipboard"
-}
+    }
+
 ]
 
 
