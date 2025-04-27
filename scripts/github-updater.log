@@ -3799,3 +3799,23 @@ Adding: /home/moonburst/.zshrc
 To https://github.com/MoonBurst/Dotfiles.git
    cb6ff98..973f24c  main -> main
 Adding: /home/moonburst/scripts/
+Adding: /home/moonburst/.config/dunst/
+Adding: /home/moonburst/.config/hypr/
+Adding: /home/moonburst/.config/MangoHud/
+Adding: /home/moonburst/.config/fuzzel/
+Adding: /home/moonburst/.config/sway/
+Adding: /home/moonburst/.config/swayidle/
+Adding: /home/moonburst/.config/waybar/
+Adding: /home/moonburst/.config/Trolltech.conf
+Adding: /home/moonburst/.config/satty/
+Adding: /home/moonburst/.config/sherlock/
+Adding: /home/moonburst/.zshrc
+[main e41a876] Automated sync: Sun Apr 20 12:00:00 AM CDT 2025
+ 8 files changed, 41 insertions(+), 81 deletions(-)
+ delete mode 100755 .config/sherlock/main.rs
+ create mode 100755 .config/waybar/modules/dunst_count.sh
+
+** (process:3242779): CRITICAL **: 00:00:01.252: store failed: Cannot autolaunch D-Bus without X11 $DISPLAY
+To https://github.com/MoonBurst/Dotfiles.git
+   aea89b2..e41a876  main -> main
+Adding: /home/moonburst/scripts/

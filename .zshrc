@@ -79,6 +79,10 @@ export DXVK_FRAME_RATE=0
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+cd() {
+  builtin cd "$@" && ls
+}
+
 ###################################
 #   NEED TO BE NEAR END OF FILE   #
 ###################################

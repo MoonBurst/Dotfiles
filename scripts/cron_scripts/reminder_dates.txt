@@ -2,6 +2,7 @@
 # Format: MM-DD:DaysInAdvance"Message"+ (Use + for urgent messages)
 01-09:7"Luster's Birthday"+
 07-13:7"Sonata's Birthday"+
+11-06-3"Chris's Birthday"
 12-05:7"Silver's Birthday"+
 
 01-01:3"New Year's Day"

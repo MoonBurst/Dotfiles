@@ -21,7 +21,7 @@ icon_size = 22 # Sets the icon size for the tiles
 caching = false                                 # If set to true, will enable caching
 cache = "~/.cache/sherlock_desktop_cache.json" # Sets the location for caching files
 daemonize = false                              # Enables daemon mode
-animation = false                               # Enables startup animations
+animate = false                               # Enables startup animations
 
 [binds]
 prev = "None" # Sets an additional bind for selection the previous item in the list
