@@ -72,8 +72,6 @@ export TERMINAL="kitty"
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 export PATH="/home/moonburst/.local/share/fnm:$PATH"
-#steam fix?
-export DXVK_FRAME_RATE=0
 
 # Needs to be at or near the end of file
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -97,6 +95,6 @@ cd() {
 
 # Needs to be at the end of file
 #eval "$(starship init zsh)"
-fastfetch --logo /home/moonburst/.config/fastfetch/test.png --logo-width 55 --logo-height 20
+fastfetch --logo /home/moonburst/.config/fastfetch/test.png --logo-width 55 --logo-height 20 --key-type string
 
 PROMPT="%{$fg[yellow]%}[%D{%T}] %{$fg[blue]%}moonburst@archlinux: %{$fg[green]%}%~%{$reset_color%} $"

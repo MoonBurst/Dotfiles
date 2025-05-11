@@ -11,9 +11,9 @@ try_suppress_warnings = false # Disables the error screen for warnings
 width = 700 # Sets the width of the main window
 height = 500 # Sets the height of the main window
 gsk_renderer = "cairo" # Sets the rendering engine. [ngl, cairo, ]
-recolor_icons = false # If set to true, uses the [icon-name]-symbolic icons
+recolor_icons = true # If set to true, uses the [icon-name]-symbolic icons
 icon_paths = [
-    "~/.config/sherlock/icons",
+    "~/.local/share/icons/hicolor/128x128/apps/",
 ] # Sets where the application should look for custom icons
 icon_size = 22 # Sets the icon size for the tiles
 

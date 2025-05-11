@@ -11,8 +11,6 @@
         "priority": 1,
         "home": true
     },
-
-
     {
     "name": "Kill Process",
     "alias": "kill",
@@ -21,7 +19,6 @@
     "priority": 6,
     "home": false
     },
-
      {
         "name": "Audacious",
         "type": "audio_sink",
@@ -31,12 +28,20 @@
         "home": true,
         "spawn_focus": false
     },  
-    {
-        "name": "Calculator",
-        "type": "calculation",
-        "args": {},
-        "priority": 1
-    },
+	{
+    "name": "Calculator",
+    "type": "calculation",
+    "args": {
+        "capabilities": [
+            "calc.math",
+            "calc.units",
+            "calc.weights",
+            "calc.volumes",
+            "calc.temperatures"
+			]
+		},
+    "priority": 1
+	},
     {
         "name": "App Launcher",
         "alias": "app",
@@ -77,7 +82,7 @@
         }},
         "priority": 4
     },
-{
+	{
     "name": "Dunst Toggle",
     "alias": "dunst",
     "type": "command",
@@ -87,21 +92,37 @@
                 "icon": "notifications",
                 "exec": "dunstctl set-paused toggle",
                 "search_string": "dunst;toggle;notifications;notify;"
-            }
-        }
-    },
+				}
+			}
+		},
+		"priority": 5
+	},
+	{
+    "name": "OBS Studio",
+    "alias": "",
+    "type": "command",
+    "args": {
+        "commands": {
+            "Start Recording": {
+                "icon": "sherlock-record",
+                "exec": "obs --startrecording &",
+                "search_string": "recording;start recording;startrecording;obs studio;"
+            },
+            "Start Streaming": {
+                "icon": "sherlock-stream",
+                "exec": "obs --startstreaming &",
+                "search_string": "streaming;start streaming;startstreaming;obs studio;"
+            },
+            "Stop Streaming": {
+                "icon": "sherlock-stop",
+                "exec": "obs --stopstreaming &",
+                "search_string": "streaming;stop streaming;stopstreaming;obs studio;"
+				}
+				}
+		
+		},
     "priority": 5
-},
-
-    {
-        "name": "OBS Studio",
-        "alias": "",
-        "type": "command",
-        "args": {"commands": {
-            "Start Recording": {"icon": "sherlock-record", "exec": "obs --startrecording &", "search_string": "recording;start recording;startrecording;obs studio;"}
-        }},
-        "priority": 5
-    },
+	},
     {
         "name": "Utilities",
         "alias": "",
@@ -111,10 +132,6 @@
         }},
         "priority": 5
     },
-
-
-
-
     {
         "name": "Web Search",
         "display_name": "Google Search",
@@ -142,7 +159,27 @@
         "args": {"icon": "wikipedia", "exec": "/home/moonburst/.config/sherlock/scripts/sherlock-wiki", "exec-args": "'{keyword}'"},
         "priority": 0,
         "shortcut": false
-    }
+    },
+    {
+    "name": "Debug",
+    "type": "debug",
+    "alias": "debug",
+    "args": {
+        "commands": {
+            "Clear Cache": {
+                "icon": "sherlock-process",
+                "exec": "clear_cache",
+                "search_string": "clear;cache;"
+            },
+            "Reset App Counts": {
+                "icon": "sherlock-process",
+                "exec": "reset_counts",
+                "search_string": "reset;clear;counts;appcounts"
+            }
+        }
+    },
+    "priority": 0
+}
 
 ]
 
