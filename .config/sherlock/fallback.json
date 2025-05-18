@@ -147,7 +147,9 @@
         "tag_start": "{keyword}",
         "alias": "yt",
         "type": "web_launcher",
-        "args": {"search_engine": "https://www.youtube.com/results?search_query={keyword}", "icon": "sherlock-youtube"},
+        "args": {"search_engine": "https://www.youtube.com/results?search_query={keyword}", 
+		"icon": "sherlock-youtube"
+				},
         "priority": 0
     },
     {
@@ -156,10 +158,28 @@
         "type": "bulk_text",
         "on_return": "next",
         "async": true, 
-        "args": {"icon": "wikipedia", "exec": "/home/moonburst/.config/sherlock/scripts/sherlock-wiki", "exec-args": "'{keyword}'"},
+        "args": {
+			"icon": "wikipedia", 
+			"exec": "/home/moonburst/.config/sherlock/scripts/sherlock-wiki", 
+			"exec-args": "'{keyword}'"
+				},
         "priority": 0,
         "shortcut": false
     },
+	{
+    "name": "Dictionary Lookup",
+    "alias": "define",
+    "type": "bulk_text",
+    "on_return": "next",
+    "async": true,
+    "args": {
+        "icon": "dictionary",
+        "exec": "/home/moonburst/.config/sherlock/scripts/dict.py",
+        "exec-args": "{keyword}"
+			},
+    "priority": 0,
+    "shortcut": false
+	},
     {
     "name": "Debug",
     "type": "debug",
