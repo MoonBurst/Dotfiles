@@ -61,7 +61,10 @@ box {
 }
 
 label {
-    color: hsl(var(--text));
+    color: hsl(var(--text));   
+}
+label#logo {
+    color: #1A1916;
 }
 
 
@@ -129,9 +132,9 @@ image {
 .tile {
     outline: none;
     min-height: 50px;
-    padding: 0px 10px;
-    margin-bottom: 5px;
-    border-radius: 4px;
+    padding: 0px 0px;
+    margin-bottom: 3px;
+    border-radius: 1px;
 }
 
 

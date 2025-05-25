@@ -125,7 +125,7 @@
 	},
     {
         "name": "Utilities",
-        "alias": "",
+        "alias": "colors",
         "type": "command",
         "args": {"commands": {
             "Color Picker": {"icon": "colorgrab", "exec": "hyprpicker -a &", "search_string": "colorpicker"}
@@ -174,12 +174,27 @@
     "async": true,
     "args": {
         "icon": "dictionary",
-        "exec": "/home/moonburst/.config/sherlock/scripts/dict.py",
+        "exec": "/home/moonburst/.config/sherlock/scripts/sherlock-tcdictionary",
         "exec-args": "{keyword}"
-			},
+    },
     "priority": 0,
     "shortcut": false
 	},
+	{
+    "name": "Session",
+    "alias": "session",
+    "type": "command",
+    "args": {
+        "commands": {
+            "Logout Sway": {
+                "icon": "logout",
+                "exec": "swaymsg exit",
+                "search_string": "logout log out exit sway session"
+            }
+        }
+    },
+    "priority": 1
+},
     {
     "name": "Debug",
     "type": "debug",

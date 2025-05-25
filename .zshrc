@@ -95,6 +95,10 @@ cd() {
 
 # Needs to be at the end of file
 #eval "$(starship init zsh)"
-fastfetch --logo /home/moonburst/.config/fastfetch/test.png --logo-width 55 --logo-height 20 --key-type string
-
+.config/fastfetch/fastfetch.sh
 PROMPT="%{$fg[yellow]%}[%D{%T}] %{$fg[blue]%}moonburst@archlinux: %{$fg[green]%}%~%{$reset_color%} $"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/moonburst/.lmstudio/bin"
+# End of LM Studio CLI section
+

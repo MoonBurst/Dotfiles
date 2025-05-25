@@ -38,8 +38,8 @@ floating_modifier $super normal
 ### Output configuration
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg $HOME/Pictures/Wallpapers/black-square.png fill
-set $primary DP-2
-bindsym $super+m output "HDMI-A-1" toggle ; output "HDMI-A-2" toggle
+set $primary "AOC 24G2W1G4 0x0000E8FA"
+bindsym $super+m output "Ancor Communications Inc MX279 CCLMRS007280" toggle ; output "LG Electronics LG ULTRAWIDE 0x0003CBC2" toggle
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 ### Input configuration
 input "type:pointer" accel_profile flat

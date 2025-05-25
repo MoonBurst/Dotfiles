@@ -38,6 +38,7 @@
 	"custom/cpu_readout",
 	"custom/gpu_readout",
 	"custom/ram_readout",
+	"custom/vram_readout",
 //	"memory", 
 	"tray"
 	],
@@ -168,15 +169,23 @@
 "custom/cpu_readout": {
   "type": "custom/script",
     "exec": "~/.config/waybar/modules/cpu_readout.sh",
+    "tooltip": false,
     "interval": 1
 },
 
 "custom/gpu_readout": {
   "exec": "~/.config/waybar/modules/gpu_readout.sh",
+  "tooltip": false,
+  "interval": 1
+},
+"custom/vram_readout": {
+  "exec": "~/.config/waybar/modules/gpu_vram.sh card1",
+  "tooltip": false,
   "interval": 1
 },
 "custom/ram_readout": {
   "exec": "~/.config/waybar/modules/ram_readout.sh",
+  "tooltip": false,
   "interval": 1
 },
 
