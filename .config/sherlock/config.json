@@ -4,27 +4,11 @@
         "calendar_client": "thunderbird",
         "terminal": "kitty"
     },
-    "debug": {
-        "try_suppress_errors": true,
-        "try_suppress_warnings": false,
-        "app_paths": ["~/.local/share/applications/"]
-    },
     "units": {
         "lengths": "meter",
         "weights": "kg",
         "volumes": "l",
         "temperatures": "C"
-    },
-    "appearance": {
-        "width": 900,
-        "height": 593,
-        "gsk_renderer": "cairo",
-        "recolor_icons": false,
-        "icon_paths": ["~/.config/sherlock/icons/"],
-        "icon_size": 22
-        "search_icon": true,
-        "use_base_css": true,
-        "status_bar": true
     },
     "behavior": {
         "caching": true,

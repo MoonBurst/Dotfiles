@@ -196,7 +196,7 @@
     "format-ethernet": "{bandwidthDownBits}   | {bandwidthUpBits} ",
     "format-linked": "(No IP)",
     "format-disconnected": "",
-    "on-click": "nm-connection-editor",
+    "on-click": "iwmenu -l custom --launcher-command \"sherlock\"",
     "tooltip": false,
     "interval": 1
 },

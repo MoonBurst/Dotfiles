@@ -160,7 +160,7 @@
         "async": true, 
         "args": {
 			"icon": "wikipedia", 
-			"exec": "/home/moonburst/.config/sherlock/scripts/sherlock-wiki", 
+			"exec": ".config/sherlock/scripts/sherlock-wiki", 
 			"exec-args": "'{keyword}'"
 				},
         "priority": 0,
@@ -174,7 +174,7 @@
     "async": true,
     "args": {
         "icon": "dictionary",
-        "exec": "/home/moonburst/.config/sherlock/scripts/sherlock-tcdictionary",
+        "exec": "/home/moonburst/.config/sherlock/scripts/sherlock-dictionary",
         "exec-args": "{keyword}"
     },
     "priority": 0,
