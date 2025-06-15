@@ -170,13 +170,17 @@
   "type": "custom/script",
     "exec": "~/.config/waybar/modules/cpu_readout.sh",
     "tooltip": false,
-    "interval": 1
+    "interval": 1,
+   	"min-length": 15,
+	"max-length": 15
 },
 
 "custom/gpu_readout": {
   "exec": "~/.config/waybar/modules/gpu_readout.sh",
   "tooltip": false,
-  "interval": 1
+  "interval": 1,
+  	"min-length": 20,
+	"max-length": 20
 },
 "custom/vram_readout": {
   "exec": "~/.config/waybar/modules/gpu_vram.sh card1",
@@ -191,6 +195,7 @@
 
 "network": {
 	"min-length": 25,
+	"max-length": 25,
 	"interface": "e*", // This is the magic line
     "format-wifi": " {bandwidthDowbBits}  {bandwidthUpBits} ",
     "format-ethernet": "{bandwidthDownBits}   | {bandwidthUpBits} ",

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Configuration
-BASE_DOWNLOAD_DIR="$HOME/Music/YouTube Downloads" # Top-level directory for all downloads
-LOG_FILE="$HOME/.local/share/youtube-music-autodl.log" # Log file for debugging/notifications
+BASE_DOWNLOAD_DIR="$HOME/Music/Music.lossless/Music/000 MP3s need updated" # Top-level directory for all downloads
+LOG_FILE="$HOME/Music" # Log file for debugging/notifications
 AUDIO_EXT="mp3" # The target audio extension (matches --audio-format)
 SLEEP_INTERVAL=2 # How often (in seconds) to check the clipboard
 
