@@ -2,7 +2,7 @@
 
 # List of directories and files to sync
 DIRECTORIES=(
-  "$HOME/zshenv"
+  "$HOME/.zshenv"
   "$HOME/scripts/"
   "$HOME/.config/dunst/"
   "$HOME/.config/hypr/"
