@@ -13,7 +13,12 @@ DIRECTORIES=(
   "$HOME/.config/Trolltech.conf"
   "$HOME/.config/satty/"
   "$HOME/.config/sherlock/"
-  "$HOME/.zshrc"
+  "$HOME/.config/zsh/"
+  "$HOME/.config/kitty/"
+  "$HOME/.local/share/gtk-2.0/
+  "$HOME/.local/share/gtk-3.0/
+  "$HOME/.local/share/gtk-4.0/
+  "$HOME/.local/share/themes/
 )
 
 # Navigate to the repository root

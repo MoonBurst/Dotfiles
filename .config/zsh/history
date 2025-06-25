@@ -1,0 +1,106 @@
+kitty @ set-colors\
+
+niri validate
+niri validate
+cd Applications
+steam
+sway --version
+journalctl -f
+downgrade sway
+sudo downgrade sway
+journalctl -f
+journalctl -b 0 -n 100
+sudo pacman -Syu
+yay
+sudo shutdown now
+sudo systemctl restart getty@tty2.service\
+
+sudo pacman -Syu
+sudo reboot now
+git clone https://git.archlinux.org/svntogit/packages.git --branch master --single-branch packages/linux\
+cd linux\
+
+;s
+ls
+cd /usr/share
+ls
+ls
+git clone https://aur.archlinux.org/linux-zen.git\
+cd linux-zen\
+
+pwd
+patch -p1 < /tmp/0001-ENGG-V2-drm-amd-display-Fix-gpu-reset-for-multidispl.patch\
+
+ls
+nano PKGBUILD
+ls
+patch -p1 < /tmp/0001-ENGG-V2-drm-amd-display-Fix-gpu-reset-for-multidispl.patch\
+
+cd /boot/loader/entries/
+ls
+cp linux-zen.conf zen2.conf
+sudo cp linux-zen.conf zen2.conf
+ls
+cat zen2.conf
+ls
+cd ..
+ls
+cd ..
+ls
+sudo cp vmlinuz-linux-zen vmlinuz-linux-zen2
+sudo rm vmlinuz-linux-zen2
+cd loader/entries
+sudo rm zen2.conf
+rm -rf linux-zen
+ls
+nano .bash_aliases
+yay mesa-git
+ls
+ps aux | grep plymouthd
+sudo kill -i 2761699
+sudo kill -i 2884412
+sudo kill -9 2761699
+sudo plymouthd --debug --tty=/dev/tty2 --theme=moonburst-wiggle
+sudo plymouthd --debug --tty=/dev/tty4 --theme=moonburst-wiggle
+sudo plymouth --show-splash
+yay
+reboot now
+sudo reboot now
+pass
+pass revolt.chat
+sudo pacman -Scc
+echo $SHELL
+pfind fchat
+yay pfind
+sudo reboot now
+pacman -Qe
+pacman -Qe > newlist.txt
+yay corectrl
+ripgrep
+ripgrep words
+yay ripgrep
+systemctl enable ly.service
+yay -S cliphist\
+yay -S corectrl\
+yay -S dmenu\
+yay -S fchat-rising\
+yay -S gnome-keyring\
+yay -S gst-plugin-pipewire\
+yay -S lib32-libjpeg-turbo\
+yay -S lib32-libxcomposite\
+yay -S lib32-libxinerama\
+yay -S libpulse\
+yay -S libvdpau\
+yay -S mesa\
+yay -S obs-studio\
+yay -S pipewire\
+yay -S pipewire-jack\
+yay -S pipewire-pulse\
+yay -S qt6-wayland\
+yay -S ripgrep\
+yay -S vulkan-radeon\
+yay -S wireplumber\
+yay -S xautoclick\
+yay -S yay-debug\
+yay -S zip
+yay fchat
