@@ -17,9 +17,9 @@ check_and_set_volume() {
     echo "DEBUG: Default sink name -> $default_sink_name" # Debugging output
 
     # Check if the default sink is Navi 31
-    if echo "$default_sink_name" | grep -q "Navi 31 HDMI/DP Audio Digital Stereo (HDMI)"; then
+    if echo "$default_sink_name" | grep -q "Navi 31 HDMI/DP Audio Digital Stereo (HDMI 2)"; then
         echo "Default audio sink is Navi 31. Adjusting volume to limit 0.35..."
-        wpctl set-volume "$sink_id" 5%+ --limit 0.35
+        wpctl set-volume "$sink_id" 5%+ --limit 0.50
 
     # Check if the default sink is Fiio E10 Analog Stereo
     elif echo "$default_sink_name" | grep -q "Fiio E10 Analog Stereo"; then

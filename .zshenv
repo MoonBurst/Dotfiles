@@ -6,6 +6,7 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 
 # Set ZDOTDIR for zsh configuration files
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+export ANTHROPIC_API_KEY="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"
 
 # Application-specific XDG paths
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
