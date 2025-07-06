@@ -119,7 +119,8 @@
 },
 "clock": {
   "format": "{:%I:%M:%p}",
-   "interval": 5
+   "interval": 5,
+   "tooltip": false
 },
 "clock#day": {
     "format": "{:%a %d %b}",
