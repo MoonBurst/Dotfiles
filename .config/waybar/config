@@ -40,11 +40,11 @@
 	"custom/gpu_readout",
 	"custom/ram_readout",
 	"custom/vram_readout",
-//	"memory", 
 	"tray"
 	],
 	
 //  Modules configuration
+
 "sway/workspaces": {
 		"disable-scroll": true,
 		"all-outputs": false,
@@ -194,7 +194,18 @@
   "tooltip": false,
   "interval": 1
 },
-
+"memory": {
+    "format": "RAM: {available}GiB",
+    "tooltip": true, // Recommended: provides more detailed info on hover
+    "units": "GiB",  // Ensures memory is displayed in GiB
+    "interval": 5,   // More efficient polling (every 5 seconds)
+    "threshold": 8.0 // Apply 'critical' class if available memory drops below 8.0 GiB
+    // "format-alt": "{used}/{total} GiB", // Optional: shows used/total on click
+    // "on-click": "gnome-system-monitor", // Optional: opens system monitor on click
+    // "on-click-right": "htop", // Optional: opens htop on right click
+    // "on-scroll-up": "some_command_up", // Optional: binds scroll up action
+    // "on-scroll-down": "some_command_down" // Optional: binds scroll down action
+},
 "network": {
 	"min-length": 25,
 	"max-length": 25,
@@ -241,11 +252,22 @@
 },
 
     
-"custom/pipewire": {
-  "exec": "~/.config/waybar/modules/pipewire.sh",
-  "interval": 1
-
+"pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-muted": "{format_muted}",
+    "format-icons": {
+        "default": ["\uf026", "\uf027", "\uf028"] // Muted, Low, High
+        // Your script icons: MUTE (0%),  (0-15%),  (16-25%),  (26%+)
+        // Here: \uf026 (Mute/Silent), \uf027 (Low), \uf028 (High)
+        // You can adjust these to match your exact thresholds if needed,
+        // but the module often handles thresholds gracefully.
+    },
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle", // Toggle mute
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+", // Increase volume by 5%
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-", // Decrease volume by 5%
+    "scroll-step": 5 // Amount to scroll by
 },
+
 
 
 

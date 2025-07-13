@@ -108,14 +108,10 @@
                 "exec": "obs --startrecording &",
                 "search_string": "recording;start recording;startrecording;obs studio;"
             },
-            "Start Streaming": {
-                "icon": "sherlock-stream",
-                "exec": "obs --startstreaming &",
-                "search_string": "streaming;start streaming;startstreaming;obs studio;"
-            },
-            "Stop Streaming": {
+
+            "Toggle Streaming": {
                 "icon": "sherlock-stop",
-                "exec": "obs --stopstreaming &",
+                "exec": "obs-cli stream toggle --password 'moonpass' ",
                 "search_string": "streaming;stop streaming;stopstreaming;obs studio;"
 				}
 				}
