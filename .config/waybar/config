@@ -207,17 +207,18 @@
     // "on-scroll-down": "some_command_down" // Optional: binds scroll down action
 },
 "network": {
-	"min-length": 25,
-	"max-length": 25,
-	"interface": "e*", // This is the magic line
-    "format-wifi": " {bandwidthDowbBits}  {bandwidthUpBits} ",
-    "format-ethernet": "{bandwidthDownBits}   | {bandwidthUpBits} ",
+    "min-length": 25,
+    "max-length": 25,
+    "interface": "e*", // This is the magic line
+    "format-wifi": " {bandwidthDownBytes}  {bandwidthUpBytes} ",
+    "format-ethernet": "{bandwidthDownBytes}  | {bandwidthUpBytes} ",
     "format-linked": "(No IP)",
     "format-disconnected": "",
     "on-click": "iwmenu -l custom --launcher-command \"sherlock\"",
     "tooltip": false,
     "interval": 1
 },
+
 "bluetooth": {
 	// "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
 	"format": " {status}",
