@@ -9,7 +9,7 @@
 * Global configuration for theme 
 * */
 * {
-  font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif,pso_font;
+  font-family: JetBrains Mono, FontAwesome, Roboto, Helvetica, Arial, sans-serif,pso_font;
   font-size: 15px;
   border-radius: 0.75em;
 }
@@ -107,6 +107,12 @@ window.DP-2,
 #user,
 #window,
 #wireplumber,
+#custom-gpu-data-gatherer,
+#custom-gpu-temp,
+#custom-gpu-usage,
+#custom-gpu-wattage,
+#custom-gpu-vram,
+#custom-gpu-combined,
 #workspaces{
   padding: 0 0.5em;
   margin: 0.005em;

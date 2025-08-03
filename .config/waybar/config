@@ -35,11 +35,12 @@
 	"bluetooth",
 //	"cpu", 
 //	"temperature",
-
+        "custom/gpu-data-gatherer",
+	"custom/gpu-combined",
 	"custom/cpu_readout",
-	"custom/gpu_readout",
+//	"custom/gpu_readout",
 	"custom/ram_readout",
-	"custom/vram_readout",
+//	"custom/vram_readout",
 	"tray"
 	],
 	
@@ -269,7 +270,17 @@
     "scroll-step": 5 // Amount to scroll by
 },
 
+    "custom/gpu-data-gatherer": {
+        // This path should now be correctly pointing to your gather_gpu_data.sh
+        "exec": "~/.config/waybar/modules/gather_gpu_data.sh",
+        "interval": 1
+    },
 
+    "custom/gpu-combined": {
+        "format": "{}",
+        "exec": "~/.config/waybar/modules/read_gpu_combined.sh",
+        "interval": 1
+    },
 
 
 "custom/dunst": {
