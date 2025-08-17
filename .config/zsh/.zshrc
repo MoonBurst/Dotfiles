@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/moonburst/.config/zsh/completions:"* ]]; then export FPATH="/home/moonburst/.config/zsh/completions:$FPATH"; fi
 #!/bin/zsh
 
 # --- 0. Load Colors Early ---
