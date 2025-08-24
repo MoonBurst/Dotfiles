@@ -1,34 +1,57 @@
 [
     {
-        "name": "Teams Event",
-        "type": "teams_event",
-        "args": {
-            "icon": "teams",
-            "date_date": "now",
-            "event_start": "-5 minutes",
-            "event_end": "+15 minutes"
-        },
-        "priority": 1,
-        "home": true
+    "name": "Dictionary Lookup",
+    "alias": "define",
+    "type": "bulk_text",
+    "on_return": "next",
+    "async": true,
+    "args": {
+        "icon": "dictionary",
+        "exec": "/home/moonburst/.config/sherlock/scripts/sherlock-dictionary",
+        "exec-args": "{keyword}"
+    },
+    "priority": 0,
+    "shortcut": false
     },
     {
-    "name": "Kill Process",
-    "alias": "kill",
-    "type": "process",
-    "args": { },
-    "priority": 6,
-    "home": false
+    "name": "Wikipedia Search",
+    "alias": "wiki",
+    "type": "bulk_text",
+    "on_return": "next",
+    "async": true, 
+    "args": {"icon": "wikipedia", "exec": "~/.config/sherlock/scripts/sherlock-wiki", "exec-args": "'{keyword}'"},
+    "priority": 0 
     },
-     {
-        "name": "Audacious",
-        "type": "audio_sink",
-        "args": { },
-        "async": true,
-        "priority": 1,
-        "home": true,
-        "spawn_focus": false
-    },  
-	{
+    {
+    "name": "OBS Studio",
+    "alias": "",
+    "type": "command",
+    "args": {
+        "commands": {
+            "Start Recording": {
+                "icon": "sherlock-record",
+                "exec": "obs --startrecording &",
+                "search_string": "recording;start recording;startrecording;obs studio;"
+            },
+            "Toggle Streaming": {
+                "icon": "sherlock-stop",
+                "exec": "obs-cli stream toggle --password 'moonpass'",
+                "search_string": "streaming;stop streaming;stopstreaming;obs studio;"
+            }
+        }
+    },
+    "priority": 5
+    },
+    {
+    "name": "Web Search",
+    "display_name": "Google Search",
+    "tag_start": "{keyword}",
+    "alias": "gg",
+    "type": "web_launcher",
+    "args": {"search_engine": "google", "icon": "google"},
+    "priority": 100
+    },
+    {
     "name": "Calculator",
     "type": "calculation",
     "args": {
@@ -38,51 +61,33 @@
             "calc.weights",
             "calc.volumes",
             "calc.temperatures"
-			]
-		},
+        ]
+    },
     "priority": 1
-	},
-    {
-        "name": "App Launcher",
-        "alias": "app",
-        "type": "app_launcher",
-        "args": {},
-        "priority": 2,
-        "home": true
     },
     {
-        "name": "Bookmarks",
-        "alias": "",
-        "type": "command",
-        "args": {"commands": {
-            "ChatGPT": {"icon": "chat-gpt", "exec": "xdg-open https://chatgpt.com &", "search_string": "chatgpt;ai;"},
-            "Github": {"icon": "sherlock-github", "exec": "xdg-open https://github.com/skxxtz &", "search_string": "github;"}
-        }},
-        "priority": 3
+    "name": "Kill Process",
+    "alias": "kill",
+    "type": "process",
+    "args": { },
+    "priority": 6
     },
     {
-        "name": "Network Management",
-        "alias": "nm",
-        "type": "command",
-        "args": {"commands": {
-            "Waves": {"icon": "network-connect", "exec": "nmcli d wifi c Waves &", "search_string": "wifi;waves"},
-            "Waves-AP": {"icon": "network-connect", "exec": "nmcli d wifi c Waves-AP &", "search_string": "wifi;wavesap"}
-        }},
-        "priority": 4
+    "name": "App Launcher",
+    "alias": "app",
+    "type": "app_launcher",
+    "args": {},
+    "priority": 2
     },
-    {
-        "name": "Power Management",
-        "alias": "pm",
-        "type": "command",
-        "args": {"commands": {
-            "Shutdown": {"icon": "system-shutdown", "exec": "systemctl poweroff", "search_string": "Poweroff;Shutdown"},
-            "Sleep": {"icon": "system-suspend", "exec": "systemctl suspend", "search_string": "Sleep;"},
-            "Lock": {"icon": "system-lock-screen", "exec": "swaylock -f -c 030303", "search_string": "Lock Screen;"},
-            "Reboot": {"icon": "system-reboot", "exec": "systemctl reboot", "search_string": "reboot"}
-        }},
-        "priority": 4
+         {
+        "name": "Audacious",
+        "type": "audio_sink",
+        "args": { },
+        "async": true,
+        "priority": 1,
+        "spawn_focus": false
     },
-	{
+    	{
     "name": "Dunst Toggle",
     "alias": "dunst",
     "type": "command",
@@ -108,17 +113,15 @@
                 "exec": "obs --startrecording &",
                 "search_string": "recording;start recording;startrecording;obs studio;"
             },
-
             "Toggle Streaming": {
                 "icon": "sherlock-stop",
                 "exec": "obs-cli stream toggle --password 'moonpass' ",
                 "search_string": "streaming;stop streaming;stopstreaming;obs studio;"
-				}
-				}
-		
-		},
+            }
+        }
+    },
     "priority": 5
-	},
+},
     {
         "name": "Utilities",
         "alias": "colors",
@@ -129,54 +132,6 @@
         "priority": 5
     },
     {
-        "name": "Web Search",
-        "display_name": "Google Search",
-        "tag_start": "{keyword}",
-        "alias": "gg",
-        "type": "web_launcher",
-        "args": {"search_engine": "google", "icon": "google"},
-        "priority": 100
-    },
-    {
-        "name": "YouTube Search",
-        "display_name": "Youtube Search",
-        "tag_start": "{keyword}",
-        "alias": "yt",
-        "type": "web_launcher",
-        "args": {"search_engine": "https://www.youtube.com/results?search_query={keyword}", 
-		"icon": "sherlock-youtube"
-				},
-        "priority": 0
-    },
-    {
-        "name": "Wikipedia Search",
-        "alias": "wiki",
-        "type": "bulk_text",
-        "on_return": "next",
-        "async": true, 
-        "args": {
-			"icon": "wikipedia", 
-			"exec": ".config/sherlock/scripts/sherlock-wiki", 
-			"exec-args": "'{keyword}'"
-				},
-        "priority": 0,
-        "shortcut": false
-    },
-	{
-    "name": "Dictionary Lookup",
-    "alias": "define",
-    "type": "bulk_text",
-    "on_return": "next",
-    "async": true,
-    "args": {
-        "icon": "dictionary",
-        "exec": "/home/moonburst/.config/sherlock/scripts/sherlock-dictionary",
-        "exec-args": "{keyword}"
-    },
-    "priority": 0,
-    "shortcut": false
-	},
-	{
     "name": "Session",
     "alias": "session",
     "type": "command",
@@ -210,9 +165,37 @@
         }
     },
     "priority": 0
-}
-
+},
+    {
+        "name": "Power Management",
+        "alias": "pm",
+        "type": "command",
+        "args": {"commands": {
+            "Shutdown": {"icon": "system-shutdown", "exec": "systemctl poweroff", "search_string": "Poweroff;Shutdown"},
+            "Sleep": {"icon": "system-suspend", "exec": "systemctl suspend", "search_string": "Sleep;"},
+            "Lock": {"icon": "system-lock-screen", "exec": "swaylock -f -c 030303", "search_string": "Lock Screen;"},
+            "Reboot": {"icon": "system-reboot", "exec": "systemctl reboot", "search_string": "reboot"}
+        }},
+        "priority": 4
+    },
+      {
+    "name": "App Launcher",
+    "alias": "app",
+    "tag_start": null,
+    "tag_end": null,
+    "display_name": null,
+    "on_return": null,
+    "next_content": null,
+    "type": "app_launcher",
+    "priority": 3.0,
+    "exit": true,
+    "shortcut": true,
+    "spawn_focus": true,
+    "async": false,
+    "home": "Home",
+    "args": {},
+    "binds": null,
+    "actions": null,
+    "add_actions": null
+  }
 ]
-
-
-
