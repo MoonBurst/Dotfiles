@@ -271,7 +271,6 @@
 },
 
     "custom/gpu-data-gatherer": {
-        // This path should now be correctly pointing to your gather_gpu_data.sh
         "exec": "~/.config/waybar/modules/gather_gpu_data.sh",
         "interval": 1
     },
