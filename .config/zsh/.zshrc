@@ -7,8 +7,8 @@ autoload -Uz colors && colors
 # --- 1. Zsh Core Settings (setopt, history behavior, zle) ---
 # History settings (HISTFILE is set in ~/.zshenv)
 setopt appendhistory
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000
+SAVEHIST=1000
 # Useful options (man zshoptions)
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
