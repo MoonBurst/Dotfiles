@@ -23,7 +23,6 @@
 	
 	
 	"modules-center": [
-	
 	],
 	
 	
@@ -35,12 +34,9 @@
 	"bluetooth",
 //	"cpu", 
 //	"temperature",
-        "custom/gpu-data-gatherer",
-	"custom/gpu-combined",
+	"custom/gpu_readout",
 	"custom/cpu_readout",
-//	"custom/gpu_readout",
 	"custom/ram_readout",
-//	"custom/vram_readout",
 	"tray"
 	],
 	
@@ -171,7 +167,7 @@
 },
 "custom/cpu_readout": {
   "type": "custom/script",
-    "exec": "~/.config/waybar/modules/cpu_readout.sh",
+ "exec": "sh ~/.config/waybar/modules/cpu_readout.sh",
     "tooltip": false,
     "interval": 1,
    	"min-length": 15,
@@ -179,17 +175,21 @@
 },
 
 "custom/gpu_readout": {
-  "exec": "~/.config/waybar/modules/gpu_readout.sh",
+  "exec": "~/.config/waybar/modules/gpu_readout.sh 0",
   "tooltip": false,
   "interval": 1,
-  	"min-length": 20,
-	"max-length": 20
+  	"min-length": 30,
+	"max-length": 30
 },
-"custom/vram_readout": {
-  "exec": "~/.config/waybar/modules/gpu_vram.sh card1",
+
+"custom/gpu_readout_nvidia": {
+  "exec": "~/.config/waybar/modules/gpu_readout_nvidia.sh",
   "tooltip": false,
-  "interval": 1
+  "interval": 1,
+  	"min-length": 30,
+	"max-length": 30
 },
+
 "custom/ram_readout": {
   "exec": "~/.config/waybar/modules/ram_readout.sh",
   "tooltip": false,
@@ -270,20 +270,11 @@
     "scroll-step": 5 // Amount to scroll by
 },
 
-    "custom/gpu-data-gatherer": {
-        "exec": "~/.config/waybar/modules/gather_gpu_data.sh",
-        "interval": 1
-    },
-
-    "custom/gpu-combined": {
-        "format": "{}",
-        "exec": "~/.config/waybar/modules/read_gpu_combined.sh",
-        "interval": 1
-    },
 
 
 "custom/dunst": {
   "exec": "~/.config/waybar/modules/dunst_count.sh",
-  "interval": 5
+  "interval": 5,
+  "on-click": "dunstctl set-paused toggle"
 }
 }

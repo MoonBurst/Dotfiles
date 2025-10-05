@@ -1,198 +1,135 @@
 #!/bin/bash
-#set -x # REMOVE THIS LINE AFTER THE SCRIPT IS WORKING CORRECTLY
 
-# Define a default PCI_ID if you want to explicitly target one
-# Leave empty to auto-detect /sys/class/drm/card0
-# Set to your 7900 XTX's PCI ID for explicit monitoring
-TARGET_PCI_ID="0000:28:00.0"
+# --- Threshold Definitions ---
+TEMP_WARNING="76,90" 		
+UTIL_WARNING="50,80" 		
+POWER_WARNING="150,300" 	
+VRAM_MAX_WARNING_PCT="50,75" #VRAM by % used
 
-get_gpu_info() {
-    local pci_id=""
-    local drm_card_path=""
-    local hwmon_path=""
-    local gpu_name=""
-    local sensors_chip_name=""
+# --- Constants and Setup ---
+COLOR_CRITICAL="#ff0000" 	
+COLOR_WARNING="#ffa500" 	
+COLOR_DEFAULT="#00FF00" 	
+COLOR_PADDING="#262626" 	
+DEVICE_ID=$1
+BYTES_PER_GIB=1073741824 
 
-    # 1. Determine the PCI ID of the target GPU
-    if [ -z "$TARGET_PCI_ID" ]; then
-        # Try to find the PCI ID associated with /sys/class/drm/card0 first
-        if [ -L "/sys/class/drm/card0/device" ]; then
-            local card0_device_path=$(readlink -f "/sys/class/drm/card0/device")
-            # Extract PCI ID (e.g., 0000:01:00.0) from the full device path
-            pci_id=$(echo "$card0_device_path" | grep -oP 'pci[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-9a-f]' | tail -n 1 | cut -c5-)
-            drm_card_path="/sys/class/drm/card0" # Explicitly set card0 path if found
-        fi
+# --- Threshold Array Initialization ---
+IFS=',' read -r -a TEMP_THRESH <<< "$TEMP_WARNING"
+IFS=',' read -r -a POWER_THRESH <<< "$POWER_WARNING"
+IFS=',' read -r -a UTIL_THRESH <<< "$UTIL_WARNING"
+IFS=',' read -r -a VRAM_THRESH <<< "$VRAM_MAX_WARNING_PCT"
+IFS=$' \t\n' # Reset IFS
 
-        # Fallback if card0 wasn't found or couldn't get its PCI ID
-        if [ -z "$pci_id" ]; then
-            # Fallback to lspci's first detected display controller
-            local pci_id_short=$(lspci -m | grep -E 'VGA compatible controller|3D controller|Display controller' | head -n 1 | awk '{print $1}')
-            if [ -n "$pci_id_short" ]; then
-                pci_id="0000:${pci_id_short}" # Prepend 0000: for full ID
-            else
-                echo "Error: Could not determine GPU PCI ID." >&2
-                return 1 # Return with error status
-            fi
-        fi
-    else
-        # Use the explicitly set TARGET_PCI_ID
-        pci_id="$TARGET_PCI_ID"
-    fi
+# --- Utility Function (Single Color Check) ---
 
-    # Ensure pci_id is in full 0000:XX:YY.Z format for consistent use
-    if ! [[ "$pci_id" =~ ^[0-9a-f]{4}: ]]; then
-        pci_id="0000:${pci_id}"
-    fi
-
-    # If drm_card_path was not set by the card0 logic, find it now based on pci_id
-    if [ -z "$drm_card_path" ]; then
-        for card_dir in /sys/class/drm/card*; do
-            if [ -L "$card_dir/device" ]; then
-                local device_path=$(readlink -f "$card_dir/device")
-                if [[ "$device_path" == *"$pci_id"* ]]; then
-                    drm_card_path="$card_dir"
-                    break
-                fi
-            fi
-        done
-    fi
-
-    # 2. Find corresponding /sys/class/hwmon/hwmonY path for power data
-    for hwmon_dir in /sys/class/hwmon/hwmon*; do
-        if [ -L "$hwmon_dir/device" ]; then
-            local device_path=$(readlink -f "$hwmon_dir/device")
-            if [[ "$device_path" == *"$pci_id"* ]]; then
-                hwmon_path="$hwmon_dir"
-                # Check for power1_average specifically, as not all hwmon devices have it
-                if [ -f "$hwmon_path/power1_average" ]; then
-                    break # Found the right hwmon with power data
-                fi
-            fi
-        fi
-    done
-
-    local lspci_output=$(lspci -v -s "$pci_id")
-
-    # 3. Get GPU Name (Prioritize Subsystem name, then general controller name)
-    # Try to extract from Subsystem line first for a more specific name
-    gpu_name=$(echo "$lspci_output" | grep -i "Subsystem:" | head -n 1 | sed -E 's/.*Subsystem: (.*)/\1/' | sed -E 's/\[[^]]*\]//g' | xargs)
-
-    if [[ -z "$gpu_name" ]]; then
-        # Fallback to the general controller name if Subsystem not found or empty
-        gpu_name=$(echo "$lspci_output" | grep -i "VGA compatible controller\|3D controller\|Display controller" | head -n 1 | sed -E 's/.*: (.*) \(rev.*\)/\1/' | sed 's/ (rev a.)//' | sed 's/ (prog-if 00 \[VGA controller\])//' | sed -E 's/\[.*\] (.*)/\1/' | sed -E 's/.*\] ([^)]*)/\1/')
-        # Further clean up GPU name (replace multiple spaces/brackets)
-        gpu_name=$(echo "$gpu_name" | sed -E 's/\[[^]]*\]//g' | sed 's/[[:space:]][[:space:]]*/ /g' | xargs)
-    fi
-
-    if [[ -z "$gpu_name" ]]; then
-        gpu_name="GPU" # Final fallback name
-    fi
-
-    # 4. Get sensors chip name (e.g., amdgpu-pci-2800)
-    # Extract only the last four hex digits for the sensors chip name match, like "2800" from "0000:28:00.0"
-    # This specifically matches your `amdgpu-pci-2800` output in `sensors -u`.
-    local pci_id_segment_for_sensors=$(echo "$pci_id" | awk -F'[:.]' '{print $2 $3}') # Robustly get "2800" from "0000:28:00.0"
-
-    sensors_chip_name=$(sensors -u | awk -v pci_id_segment="${pci_id_segment_for_sensors}" '
-        # Match lines that start with a known GPU chip type and "pci-"
-        # The [0-9a-f]+ part matches the "2800"
-        /^(amdgpu|nvidia|nvme|radeon)-pci-[0-9a-f]+/ {
-            # Perform the match
-            match($0, /^(amdgpu|nvidia|nvme|radeon)-pci-[0-9a-f]+/);
-            # Extract the full chip name (e.g., "amdgpu-pci-2800")
-            chip_name_full = substr($0, RSTART, RLENGTH);
-
-            # Extract just the "2800" part for comparison
-            extracted_pci_part = chip_name_full;
-            sub(/^(amdgpu|nvidia|nvme|radeon)-pci-/, "", extracted_pci_part);
-
-            # Compare the extracted PCI part with our target segment
-            if (extracted_pci_part == pci_id_segment) {
-                print chip_name_full; # Print the full chip name (e.g., "amdgpu-pci-2800")
-                exit; # Exit after finding the first match to avoid processing further
-            }
-        }' | tr -d '/') # Remove any trailing slashes if present
-
-    # Output each value on a new line for readarray
-    echo "$pci_id"
-    echo "$drm_card_path"
-    echo "$hwmon_path"
-    echo "$gpu_name"
-    echo "$sensors_chip_name"
+function determine_color {
+    local value=$1; local warn=$2; local crit=$3
+    local color_code="$COLOR_DEFAULT"
+    # Logic: If value is GREATER THAN crit/warn, change color.
+    if (( $(echo "$value > $crit" | bc -l) )); then color_code="$COLOR_CRITICAL"; 
+    elif (( $(echo "$value > $warn" | bc -l) )); then color_code="$COLOR_WARNING"; fi
+    echo "$color_code"
 }
 
-# --- Main script starts here ---
-
-# Call the function and read the returned values line by line into an array
-# Using readarray for robust multi-line output handling
-readarray -t gpu_info_array < <(get_gpu_info)
-
-# Assign array elements to individual variables
-PCI_ID="${gpu_info_array[0]}"
-DRMCARD_PATH="${gpu_info_array[1]}"
-HWMON_PATH="${gpu_info_array[2]}"
-GPU_NAME="${gpu_info_array[3]}"
-SENSORS_CHIP_NAME="${gpu_info_array[4]}"
-
-# Check if essential info was successfully retrieved
-if [ -z "$PCI_ID" ] || [ -z "$DRMCARD_PATH" ]; then
-    echo "Error: Could not retrieve GPU information or relevant paths. Check script or PCI ID."
-    exit 1
+# --- Input Validation ---
+if [ -z "$DEVICE_ID" ] || ([ "$DEVICE_ID" != "0" ] && [ "$DEVICE_ID" != "1" ]); then
+    echo "Error: Invalid or missing device ID. Must be 0 or 1." >&2; exit 1
 fi
 
-# GPU Temperature
-# If SENSORS_CHIP_NAME is found, use it directly for precise reading.
-if [ -n "$SENSORS_CHIP_NAME" ]; then
-    # Use the specific chip name, then grep for "edge" temperature
-    temperature=$(sensors "${SENSORS_CHIP_NAME}" | grep "edge" | awk '{print $2}' | cut -c2- | tr -d '\n')
-else
-    # Fallback temperature detection if specific chip name not found (shouldn't happen now)
-    # This might still pick up other GPUs if multiple "gpu" entries exist
-    temperature=$(sensors | grep "gpu" | { read gpu_output; sensors | grep "$gpu_output" -A 5 | grep edge | awk '{print $2}' | cut -c2-; } | tr -d '\n')
+# ----------------------------------------------------------------------
+# --- Primary ROCM-SMI Call & Extraction ---
+# ----------------------------------------------------------------------
+
+ROCM_OUTPUT=$(rocm-smi -d "$DEVICE_ID" -a --showmeminfo VRAM 2>/dev/null)
+
+if [ -z "$ROCM_OUTPUT" ]; then
+    echo "Error: 'rocm-smi' returned no output." >&2; exit 1
 fi
 
-# Remove decimal part and set color
-temperature=${temperature%.*}
-if (( temperature < 65 )); then
-  temperature_color='#00FF00'
-else
-  temperature_color='#f53c3c'
+# Extract and sanitize values.
+TEMP_JUNCTION=$(echo "$ROCM_OUTPUT" | grep "Temperature (Sensor junction)" | awk '{print $NF}' | xargs printf "%.0f")
+POWER_W=$(echo "$ROCM_OUTPUT" | grep "Average Graphics Package Power" | awk '{print $NF}' | xargs printf "%.0f")
+GPU_USAGE_NUM=$(echo "$ROCM_OUTPUT" | grep "GPU use (%)" | awk '{print $NF}' | tr -cd '0-9')
+VRAM_TOTAL_BYTES=$(echo "$ROCM_OUTPUT" | grep "VRAM Total Memory (B)" | awk '{print $NF}' | tr -cd '0-9')
+VRAM_USED_BYTES=$(echo "$ROCM_OUTPUT" | grep "VRAM Total Used Memory (B)" | awk '{print $NF}' | tr -cd '0-9')
+
+# Set defaults (condensed)
+TEMP_JUNCTION=${TEMP_JUNCTION:-0}; POWER_W=${POWER_W:-0}; GPU_USAGE_NUM=${GPU_USAGE_NUM:-0}
+VRAM_TOTAL_BYTES=${VRAM_TOTAL_BYTES:-0}; VRAM_USED_BYTES=${VRAM_USED_BYTES:-0} 
+
+# Validation
+if [ "$TEMP_JUNCTION" -eq 0 ] && [ "$POWER_W" -eq 0 ] && [ "$GPU_USAGE_NUM" -eq 0 ]; then
+    echo "Error: Failed to parse core metrics for Device $DEVICE_ID." >&2; exit 1
 fi
 
-# GPU Usage
-if [ -f "${DRMCARD_PATH}/device/gpu_busy_percent" ]; then
-    gpu_usage_raw=$(cat "${DRMCARD_PATH}/device/gpu_busy_percent" | tr -d '\n')
-    gpu_usage=$(printf "%d" "$gpu_usage_raw") # Ensure it's an integer
-else
-    gpu_usage="N/A" # Set to N/A if file not found
-    usage_color='#AAAAAA' # Grey out if data not available
-fi
+# ----------------------------------------------------------------------
+# --- VRAM CSV FALLBACK LOGIC ---
+# ----------------------------------------------------------------------
+if [ "$VRAM_TOTAL_BYTES" -eq 0 ] || [ "$VRAM_USED_BYTES" -eq 0 ]; then
+    CSV_LINE=$(rocm-smi --showmeminfo VRAM --csv 2>/dev/null | grep "^card$DEVICE_ID,")
 
-if [[ "$gpu_usage" != "N/A" ]]; then
-    if (( gpu_usage < 95 )); then
-      usage_color='#00FF00'
-    else
-      usage_color='#f53c3c'
+    if [ -n "$CSV_LINE" ]; then
+        IFS=',' read -r _ TOTAL_CSV_RAW USED_CSV_RAW <<< "$CSV_LINE"
+        TOTAL_CSV=${TOTAL_CSV_RAW//[^0-9]/}; USED_CSV=${USED_CSV_RAW//[^0-9]/}
+
+        if [ "$VRAM_TOTAL_BYTES" -eq 0 ] && [ "$TOTAL_CSV" -ne 0 ]; then
+            VRAM_TOTAL_BYTES="$TOTAL_CSV"
+        fi
+        
+        if [ "$VRAM_USED_BYTES" -eq 0 ] && [ "$USED_CSV" -ne 0 ]; then
+            VRAM_USED_BYTES="$USED_CSV"
+        fi
     fi
 fi
 
+# ----------------------------------------------------------------------
+# --- VRAM Calculation and Formatting ---
+# ----------------------------------------------------------------------
 
-# Wattage
-if [ -f "${HWMON_PATH}/power1_average" ]; then
-    wattage_raw=$(cat "${HWMON_PATH}/power1_average" | tr -d '\n')
-    wattage=$((wattage_raw / 1000000)) # Convert microwatts to watts
-else
-    wattage="N/A" # Set to N/A if file not found
-    wattage_color='#AAAAAA' # Grey out if data not available
+VRAM_COLOR="$COLOR_DEFAULT"
+VRAM_DISPLAY_VALUE="N/A"
+VRAM_IS_GIB=0 
+
+if [ "$VRAM_TOTAL_BYTES" -gt 0 ]; then
+    VRAM_REMAINING_BYTES=$(echo "$VRAM_TOTAL_BYTES - $VRAM_USED_BYTES" | bc)
+    VRAM_DISPLAY_VALUE=$(printf "%.0f" "$(echo "scale=1; $VRAM_REMAINING_BYTES / $BYTES_PER_GIB" | bc)")
+    VRAM_USED_PCT=$(echo "scale=1; $VRAM_USED_BYTES * 100 / $VRAM_TOTAL_BYTES" | bc)
+    VRAM_COLOR=$(determine_color "$VRAM_USED_PCT" "${VRAM_THRESH[0]}" "${VRAM_THRESH[1]}") 
+    VRAM_IS_GIB=1
+
+elif [ "$VRAM_USED_BYTES" -gt 0 ]; then
+    VRAM_DISPLAY_VALUE=$(printf "%.1f" "$(echo "scale=1; $VRAM_USED_BYTES / $BYTES_PER_GIB" | bc)") 
+    VRAM_COLOR="$COLOR_DEFAULT"
+    VRAM_IS_GIB=2 
 fi
 
-if [[ "$wattage" != "N/A" ]]; then
-    if (( wattage < 150 )); then
-      wattage_color='#00FF00'
-    else
-      wattage_color='#f53c3c'
-    fi
+# ----------------------------------------------------------------------
+# --- Final Coloring and Output (Maximized Efficiency) ---
+# ----------------------------------------------------------------------
+
+# Determine colors
+TEMP_COLOR=$(determine_color "$TEMP_JUNCTION" "${TEMP_THRESH[0]}" "${TEMP_THRESH[1]}")
+POWER_COLOR=$(determine_color "$POWER_W" "${POWER_THRESH[0]}" "${POWER_THRESH[1]}")
+UTIL_COLOR=$(determine_color "$GPU_USAGE_NUM" "${UTIL_THRESH[0]}" "${UTIL_THRESH[1]}")
+
+# Determine Overall Status Color
+OVERALL_COLOR="$COLOR_DEFAULT"
+if [[ "$TEMP_COLOR" == "$COLOR_CRITICAL" || "$POWER_COLOR" == "$COLOR_CRITICAL" || "$VRAM_COLOR" == "$COLOR_CRITICAL" || "$UTIL_COLOR" == "$COLOR_CRITICAL" ]]; then
+    OVERALL_COLOR="$COLOR_CRITICAL"
+elif [[ "$TEMP_COLOR" == "$COLOR_WARNING" || "$POWER_COLOR" == "$COLOR_WARNING" || "$VRAM_COLOR" == "$COLOR_WARNING" || "$UTIL_COLOR" == "$COLOR_WARNING" ]]; then
+    OVERALL_COLOR="$COLOR_WARNING"
 fi
 
-# Display GPU temperature and usage with color coding
-echo -e "<span foreground='$temperature_color'>GPU: $temperature°C</span> <span foreground='$usage_color'>$gpu_usage%</span> <span foreground='$wattage_color'>$wattage W</span>"
+# Function to get padding (Only runs once per metric, inline)
+get_pad() {
+    local val=$1; local len=${#val}; local target=$2
+    if [ "$len" -lt "$target" ]; then printf "<span foreground=\"$COLOR_PADDING\">%0*d</span>" $((target - len)) 0; fi
+}
+
+# Final output - SPACE REMOVED from before 'W'
+echo "<span foreground=\"$OVERALL_COLOR\">GPU:</span> \
+<span foreground=\"$TEMP_COLOR\">$(get_pad "$TEMP_JUNCTION" 3)$TEMP_JUNCTION°C</span> \
+<span foreground=\"$UTIL_COLOR\">$(get_pad "$GPU_USAGE_NUM" 3)$GPU_USAGE_NUM%</span> \
+<span foreground=\"$POWER_COLOR\">$(get_pad "$POWER_W" 3)${POWER_W}W</span> \
+<span foreground=\"$VRAM_COLOR\">VRAM: $VRAM_DISPLAY_VALUE GiB</span>"

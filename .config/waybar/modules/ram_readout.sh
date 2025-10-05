@@ -1,17 +1,19 @@
 #!/bin/bash
-
-# Get the available memory in GiB
 available_memory=$(free -g | awk '/Mem/ {print $7}')
-#available_memory=$(free -g | awk '/Mem/ {printf "%.2f\n", $7}')
-# Set the threshold value in GiB for color change
-threshold=8.0
+# Set the thresholds in GiB (as integers)
+RED_THRESHOLD=8
+WARN_THRESHOLD=16
 
-# Determine the color based on available memory and threshold
-if (( $(awk -v x="$available_memory" -v y="$threshold" 'BEGIN {print (x < y)}') )); then
-    color="#FF0000"  # Red color for low memory
+LOW="#FF0000"     # Red color for critically low memory (< 8 GiB)
+WARN="#FFA500"    # Orange/Amber color for warning memory (>= 8 GiB and < 16 GiB)
+SUFFICIENT="#00FF00" # Green color for sufficient memory (>= 16 GiB)
+
+if (( available_memory < RED_THRESHOLD )); then
+    color="$LOW"
+elif (( available_memory < WARN_THRESHOLD )); then
+    color="$WARN"
 else
-    color="#00FF00"  # Green color for sufficient memory
+    color="$SUFFICIENT"
 fi
-
-# Print the available memory in the specified color
+# Print the available memory in the specified color.
 echo "<span foreground='$color'>RAM: $available_memory GiB</span>"

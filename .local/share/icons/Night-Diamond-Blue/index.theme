@@ -1,0 +1,13 @@
+[Icon Theme]
+Name=Night-Diamond-Blue
+Comment=Cursor Theme
+Example=default
+Inherits=core
+Directories=cursors
+Size=24
+
+
+[cursors]
+Size=24
+Context=Cursor
+Type=Scalable

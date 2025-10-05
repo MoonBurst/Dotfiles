@@ -20,6 +20,7 @@ DIRECTORIES=(
   "$HOME/.local/share/gtk-3.0/"
   "$HOME/.local/share/gtk-4.0/"
   "$HOME/.local/share/themes/"
+  "$HOME/.local/share/icons/"
 )
 
 # Navigate to the repository root
