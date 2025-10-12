@@ -12,7 +12,7 @@ widget base background color */
 @define-color theme_bg_color_breeze #2a2e32;
 /*
 text widgets and the like base background color */
-@define-color theme_base_color_breeze #1b1e20;
+@define-color theme_base_color_breeze #0f0f0f;
 /*
 view hover decoration color*/
 @define-color theme_view_hover_decoration_color_breeze #3daee9;
@@ -57,7 +57,7 @@ widget base background color on backdrop windows */
 @define-color theme_unfocused_bg_color_breeze #2a2e32;
 /*
 text widgets and the like base background color on backdrop windows */
-@define-color theme_unfocused_base_color_breeze #1b1e20;
+@define-color theme_unfocused_base_color_breeze #0f0f0f;
 /*
 base background color of selections on backdrop windows, alt */
 @define-color theme_unfocused_selected_bg_color_alt_breeze #3daee9;
@@ -160,7 +160,7 @@ these are pretty self explicative */
 * Misc
 */
 @define-color print_paper_backdrop_breeze  white;
-@define-color content_view_bg_breeze #1b1e20;
+@define-color content_view_bg_breeze #0f0f0f;
 /*
  * GTK API color re-defs
  */

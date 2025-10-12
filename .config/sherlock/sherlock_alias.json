@@ -17,7 +17,7 @@
     "Vesktop": {
         "name": "Discord",
         "icon": "discord",
-        "exec": "/usr/bin/vesktop --enable-features=UseOzonePlatform --ozone-platform=wayland %U",
+        "exec": "/usr/bin/vesktop --disable-gpu-memory-buffer-video-frames",
         "keywords": "discord"
     }
 }
