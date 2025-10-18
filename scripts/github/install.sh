@@ -140,4 +140,3 @@ echo ""
 echo "--- Installation Complete! ---"
 echo "Folders moved: .config, .local, scripts"
 echo "Link created: $ZSHENV_TARGET"
-#
