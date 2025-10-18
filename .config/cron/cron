@@ -1,0 +1,30 @@
+#*   *   *   *   *  sh /path/to/script/script.sh
+#|   |   |   |   |              |
+#|   |   |   |   |      Command or Script to Execute        
+#|   |   |   |   |
+#|   |   |   |   |
+#|   |   |   |   |
+#|   |   |   | Day of the Week(0-6)
+#|   |   |   |
+#|   |   | Month of the Year(1-12)
+#|   |   |
+#|   | Day of the Month(1-31)  
+#|   |
+#| Hour(0-23)  
+#|
+#Min(0-59)
+
+#backs up music
+0  12 * * * ~/scripts/cron_scripts/music-backup.sh >/dev/null 2>&1
+#backs up passwords
+0 0 * * 0 ~/scripts/cron_scripts/pass_copy.sh >/dev/null 2>&1
+#pushes a backup to nextcloud
+0 4 1 * * /home/moonburst/scripts/cron_scripts/nextcloud_upload.sh >/dev/null 2>&1
+#moves .desktop files from home folder to .local/share/applications (mostly for steam games) 
+0 */4 * * * ~/scripts/cron_scripts/mv-.desktop-to-applications.sh >/dev/null 2>&1
+#reminders
+0 */4 * * * scripts/cron_scripts/reminder.sh >/dev/null 2>&1
+#github update
+0 0 * * 0 /bin/bash ~/scripts/github/github-updater.sh >> ~/scripts/github-updater.log >/dev/null 2>&1
+#wallpaper switching
+*/30 * * * * /home/moonburst/scripts/cron_scripts/wallpaper.sh  >/dev/null 2>&1

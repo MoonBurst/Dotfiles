@@ -1,19 +1,13 @@
 #!/bin/bash
 
-# --- Crontab Backup ---
-# Define the temporary location for the crontab backup as requested.
-CRON_TMP_DIR="/tmp/crontab/"
-CRON_TMP_FILE="$CRON_TMP_DIR/cron"
 
-echo "Creating temporary crontab backup at $CRON_TMP_FILE"
-mkdir -p "$CRON_TMP_DIR"
-# List the crontab and save it to the dedicated temporary file
-crontab -l > "$CRON_TMP_FILE"
 
+crontab -l > ~/.config/cron/cron
 # --- List of directories and files to sync ---
 DIRECTORIES=(
   "$CRON_TMP_DIR"
   "$HOME/scripts/"
+  "$HOME/.config/cron/"
   "$HOME/.config/dunst/"
   "$HOME/.config/fastfetch/"
   "$HOME/.config/hypr/"
