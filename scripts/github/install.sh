@@ -23,7 +23,7 @@ TEMP_ARCHIVE="/tmp/${REPO_NAME}_${BRANCH}.zip"
 # The folder created when unzipping a GitHub archive (e.g., Dotfiles-main)
 EXTRACTED_FOLDER="${DOWNLOAD_DEST}/${REPO_NAME}-${BRANCH}"
 
-# --- Confirmation Step (DEMAND 'confirm') ---
+# --- Confirmation Step (FIXED INTERACTIVE INPUT) ---
 if [ -z "$DRY_RUN" ]; then
     # Define ANSI Codes
     RED='\033[31m'
@@ -31,11 +31,13 @@ if [ -z "$DRY_RUN" ]; then
     BOLD='\033[1m'
     RESET='\033[0m'
     
-    # 1. Print the warning/prompt message with colors using echo -e
+    # 1. Print the warning/prompt message with colors using echo -e and add a newline
     echo -e "${RED}${BOLD}WARNING:${RESET} This will ${RED}overwrite${RESET} .config and .local/share to match that of ${BLUE}Moon Burst${RESET}."
+    echo # Newline for separation
     
-    # 2. Get user input, explicitly asking for "confirm"
-    read -r -p "To proceed, please type 'confirm': " response
+    # 2. Get user input, explicitly asking for "confirm" from the terminal (/dev/tty)
+    echo -n "To proceed, please type 'confirm': "
+    read -r response </dev/tty 
     
     case "$response" in
         [cC][oO][nN][fF][iI][rR][mM]) # Checks for 'confirm' (case-insensitive)
