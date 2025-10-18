@@ -3,9 +3,8 @@
 # Custom Installation Script for MoonBurst/Dotfiles
 # This script executes a specific sequence of download, extraction, and move operations.
 #
-# ASSUMPTION: This script is intended to be run on a fresh Linux install where
-#             .config, .local, and scripts folders in the home directory do not yet exist,
-#             allowing for simple 'mv' operations instead of complex 'rsync' merging.
+# FIX: The previous version linked .zshenv to a file that was deleted in the cleanup.
+# The fix moves .zshenv directly to $HOME to ensure ZDOTDIR is set correctly.
 
 # Check for Dry Run mode
 DRY_RUN=""
@@ -28,7 +27,7 @@ EXTRACTED_FOLDER="${DOWNLOAD_DEST}/${REPO_NAME}-${BRANCH}"
 
 echo "--- Custom Dotfiles Setup for ${REPO_USER}/${REPO_NAME} ---"
 
-# 1. Download the repository archive
+# 1. Download the repository archive (unchanged)
 echo "[1/5] Downloading archive from GitHub..."
 mkdir -p "$DOWNLOAD_DEST"
 # Use curl to download the zip file to a temporary location
@@ -38,7 +37,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# New Error Check: Verify file size is large enough to be a valid ZIP
+# Error Check: Verify file size is large enough to be a valid ZIP
 ARCHIVE_SIZE=$(stat -c%s "$TEMP_ARCHIVE" 2>/dev/null || echo 0)
 MIN_SIZE=1000 # Minimum expected size for a tiny ZIP file (1KB)
 
@@ -50,14 +49,11 @@ if [ "$ARCHIVE_SIZE" -lt "$MIN_SIZE" ]; then
     exit 1
 fi
 
-# 2. Extract to ~/github_download/
+# 2. Extract to ~/github_download/ (unchanged)
 echo "[2/5] Extracting archive contents to $DOWNLOAD_DEST..."
 # Ensure the destination folder is clean before extraction (runs even in dry-run to stage extraction)
 rm -rf "${EXTRACTED_FOLDER}"
 unzip -q "$TEMP_ARCHIVE" -d "$DOWNLOAD_DEST"
-
-# 3. Move .config, .local, and scripts folders to ~/
-echo "[3/5] Moving specified folders to $HOME..."
 
 # Check if the extracted directory exists
 if [ ! -d "$EXTRACTED_FOLDER" ]; then
@@ -67,7 +63,10 @@ if [ ! -d "$EXTRACTED_FOLDER" ]; then
     exit 1
 fi
 
-# Move .config contents (Revised to move contents INSTEAD of the folder itself)
+# 3. Move .config, .local, and scripts folders to ~/ (unchanged)
+echo "[3/5] Moving specified folders to $HOME..."
+
+# Move .config contents
 if [ -d "${EXTRACTED_FOLDER}/.config" ]; then
     echo "-> Moving contents of .config/ to $HOME/.config"
     if [ -z "$DRY_RUN" ]; then
@@ -79,7 +78,7 @@ if [ -d "${EXTRACTED_FOLDER}/.config" ]; then
     fi
 fi
 
-# Move .local contents (Revised to move contents INSTEAD of the folder itself)
+# Move .local contents
 if [ -d "${EXTRACTED_FOLDER}/.local" ]; then
     echo "-> Moving contents of .local/ to $HOME/.local"
     if [ -z "$DRY_RUN" ]; then
@@ -91,7 +90,7 @@ if [ -d "${EXTRACTED_FOLDER}/.local" ]; then
     fi
 fi
 
-# Move scripts contents (Revised to move contents INSTEAD of the folder itself)
+# Move scripts contents
 if [ -d "${EXTRACTED_FOLDER}/scripts" ]; then
     echo "-> Moving contents of scripts/ to $HOME/scripts"
     if [ -z "$DRY_RUN" ]; then
@@ -103,26 +102,25 @@ if [ -d "${EXTRACTED_FOLDER}/scripts" ]; then
     fi
 fi
 
-# 4. Create the symbolic link for .zshenv
-# The .zshenv file remains in the extracted folder after the folder moves above.
+# 4. MOVE the .zshenv file (FIXED: Changed from ln -sfn to mv)
 ZSHENV_SOURCE="${EXTRACTED_FOLDER}/.zshenv"
 ZSHENV_TARGET="$HOME/.zshenv"
 
-echo "[4/5] Creating symbolic link: $ZSHENV_TARGET -> $ZSHENV_SOURCE"
+echo "[4/5] Moving .zshenv to $HOME/.zshenv (Prevents broken symlink cleanup issue)"
 if [ -f "$ZSHENV_SOURCE" ]; then
     if [ -z "$DRY_RUN" ]; then
-        # -s: symbolic link, -f: force (overwrite existing link/file), -n: treat link as file if target is directory
-        ln -sfn "$ZSHENV_SOURCE" "$ZSHENV_TARGET"
-        echo "-> Link created successfully."
+        # Use mv to move the file directly so cleanup doesn't break the configuration
+        mv "$ZSHENV_SOURCE" "$ZSHENV_TARGET"
+        echo "-> .zshenv moved successfully."
     else
-        echo "   [DRY-RUN] ln -sfn \"$ZSHENV_SOURCE\" \"$ZSHENV_TARGET\""
-        echo "-> Link command printed (Dry Run)."
+        echo "   [DRY-RUN] mv \"$ZSHENV_SOURCE\" \"$ZSHENV_TARGET\""
+        echo "-> Move command printed (Dry Run)."
     fi
 else
-    echo "Warning: .zshenv not found at $ZSHENV_SOURCE. Link not created."
+    echo "Warning: .zshenv not found at $ZSHENV_SOURCE. File not moved."
 fi
 
-# 5. Final Cleanup
+# 5. Final Cleanup (unchanged, but now safe)
 echo "[5/5] Performing cleanup..."
 
 if [ -z "$DRY_RUN" ]; then
@@ -139,4 +137,4 @@ fi
 echo ""
 echo "--- Installation Complete! ---"
 echo "Folders moved: .config, .local, scripts"
-echo "Link created: $ZSHENV_TARGET"
+echo "File moved: $ZSHENV_TARGET"
