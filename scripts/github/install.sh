@@ -2,9 +2,7 @@
 #
 # Custom Installation Script for MoonBurst/Dotfiles
 # This script executes a specific sequence of download, extraction, and move operations.
-#
-# FIX: The previous version linked .zshenv to a file that was deleted in the cleanup.
-# The fix moves .zshenv directly to $HOME to ensure ZDOTDIR is set correctly.
+
 
 # Check for Dry Run mode
 DRY_RUN=""
@@ -24,6 +22,32 @@ DOWNLOAD_DEST="$HOME/github_download"
 TEMP_ARCHIVE="/tmp/${REPO_NAME}_${BRANCH}.zip"
 # The folder created when unzipping a GitHub archive (e.g., Dotfiles-main)
 EXTRACTED_FOLDER="${DOWNLOAD_DEST}/${REPO_NAME}-${BRANCH}"
+
+# --- Confirmation Step (DEMAND 'confirm') ---
+if [ -z "$DRY_RUN" ]; then
+    # Define ANSI Codes
+    RED='\033[31m'
+    BLUE='\033[34m'
+    BOLD='\033[1m'
+    RESET='\033[0m'
+    
+    # 1. Print the warning/prompt message with colors using echo -e
+    echo -e "${RED}${BOLD}WARNING:${RESET} This will ${RED}overwrite${RESET} .config and .local/share to match that of ${BLUE}Moon Burst${RESET}."
+    
+    # 2. Get user input, explicitly asking for "confirm"
+    read -r -p "To proceed, please type 'confirm': " response
+    
+    case "$response" in
+        [cC][oO][nN][fF][iI][rR][mM]) # Checks for 'confirm' (case-insensitive)
+            echo "Proceeding with installation..."
+            ;;
+        *)
+            echo "Installation aborted by user."
+            exit 0
+            ;;
+    esac
+fi
+# ------------------------------------
 
 echo "--- Custom Dotfiles Setup for ${REPO_USER}/${REPO_NAME} ---"
 
