@@ -67,33 +67,39 @@ if [ ! -d "$EXTRACTED_FOLDER" ]; then
     exit 1
 fi
 
-# Move .config
+# Move .config contents (Revised to move contents INSTEAD of the folder itself)
 if [ -d "${EXTRACTED_FOLDER}/.config" ]; then
-    echo "-> Moving .config/ to $HOME"
+    echo "-> Moving contents of .config/ to $HOME/.config"
     if [ -z "$DRY_RUN" ]; then
-        mv "${EXTRACTED_FOLDER}/.config" "$HOME/"
+        mkdir -p "$HOME/.config" # Ensure destination exists
+        mv "${EXTRACTED_FOLDER}/.config/"* "$HOME/.config/"
     else
-        echo "   [DRY-RUN] mv \"${EXTRACTED_FOLDER}/.config\" \"$HOME/\""
+        echo "   [DRY-RUN] mkdir -p \"$HOME/.config\""
+        echo "   [DRY-RUN] mv \"${EXTRACTED_FOLDER}/.config/\"* \"$HOME/.config/\""
     fi
 fi
 
-# Move .local
+# Move .local contents (Revised to move contents INSTEAD of the folder itself)
 if [ -d "${EXTRACTED_FOLDER}/.local" ]; then
-    echo "-> Moving .local/ to $HOME"
+    echo "-> Moving contents of .local/ to $HOME/.local"
     if [ -z "$DRY_RUN" ]; then
-        mv "${EXTRACTED_FOLDER}/.local" "$HOME/"
+        mkdir -p "$HOME/.local" # Ensure destination exists
+        mv "${EXTRACTED_FOLDER}/.local/"* "$HOME/.local/"
     else
-        echo "   [DRY-RUN] mv \"${EXTRACTED_FOLDER}/.local\" \"$HOME/\""
+        echo "   [DRY-RUN] mkdir -p \"$HOME/.local\""
+        echo "   [DRY-RUN] mv \"${EXTRACTED_FOLDER}/.local/\"* \"$HOME/.local/\""
     fi
 fi
 
-# Move scripts
+# Move scripts contents (Revised to move contents INSTEAD of the folder itself)
 if [ -d "${EXTRACTED_FOLDER}/scripts" ]; then
-    echo "-> Moving scripts/ to $HOME"
+    echo "-> Moving contents of scripts/ to $HOME/scripts"
     if [ -z "$DRY_RUN" ]; then
-        mv "${EXTRACTED_FOLDER}/scripts" "$HOME/"
+        mkdir -p "$HOME/scripts" # Ensure destination exists
+        mv "${EXTRACTED_FOLDER}/scripts/"* "$HOME/scripts/"
     else
-        echo "   [DRY-RUN] mv \"${EXTRACTED_FOLDER}/scripts\" \"$HOME/\""
+        echo "   [DRY-RUN] mkdir -p \"$HOME/scripts\""
+        echo "   [DRY-RUN] mv \"${EXTRACTED_FOLDER}/scripts/\"* \"$HOME/scripts/\""
     fi
 fi
 
@@ -134,4 +140,3 @@ echo ""
 echo "--- Installation Complete! ---"
 echo "Folders moved: .config, .local, scripts"
 echo "Link created: $ZSHENV_TARGET"
-#
