@@ -1,10 +1,10 @@
-@define-color base   #0f0f0f;
-@define-color text     #ffffff;
+@define-color base   			#0f0f0f;
+@define-color text     			#ffffff;
 @define-color bubble_background #262626;
-@define-color outline #494d64;
-@define-color blue      #8aadf4;
-@define-color yellow    #eed49f;
-@define-color red       #ed8796;
+@define-color outline 			#494d64;
+@define-color blue      		#8aadf4;
+@define-color yellow   			#eed49f;
+@define-color red      			#ed8796;
 
 * {
   font-family: JetBrains Mono, FontAwesome, Roboto, Helvetica, Arial, sans-serif,pso_font;
@@ -66,7 +66,7 @@ box {
 #cpu,
 #custom-beats,
 #custom-cpu_readout,
-#custom-dunst,
+#custom-dunst_count,
 #custom-github,
 #custom-gpu_readout,
 #custom-notification,
@@ -75,7 +75,7 @@ box {
 #custom-ram_readout,
 #custom-separator-left,
 #custom-separator-right,
-#custom-updates,
+#custom-pacman_updates,
 #custom-vram_readout,
 #custom-wayves,
 #custom-weather,
