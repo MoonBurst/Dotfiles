@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=moonburst-wiggle
+Description=pone wiggles!
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/moonburst-wiggle
+ScriptFile=/usr/share/plymouth/themes/moonburst-wiggle/moonburst-wiggle.script

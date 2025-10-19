@@ -60,7 +60,7 @@ display_raw = true
 daemonize = true
 
 [caching]
-enable = true
+enable = false
 cache = "/home/moonburst/.cache/sherlock/desktop_cache.bin"
 
 [expand]
@@ -74,10 +74,10 @@ opacity = 0.6
 edge = "top"
 
 [status_bar]
-enable = true
+enable = false
 
 [search_bar_icon]
-enable = true
+enable = false
 icon = "system-search-symbolic"
 icon_back = "sherlock-back"
 size = 32

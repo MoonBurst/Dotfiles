@@ -1,0 +1,44 @@
+Window.SetBackgroundTopColor (0, 0, 0);
+Window.SetBackgroundBottomColor (0, 0, 0);
+for(i = 1; i <= 19; i++)
+{
+  image[i].image = Image("image-" + i + ".png");
+  image[i].sprite = Sprite(image[i].image);
+  image[i].sprite.SetOpacity(0);
+  // image[i].x = Window.GetX() + Window.GetWidth() / 2 - image[i].image.GetWidth() / 2; // Original line
+  // image[i].y = Window.GetY() + Window.GetHeight() / 2 - image[i].image.GetHeight() / 2; // Original line
+  image[i].x = (Window.GetWidth() - image[i].image.GetWidth()) / 2; // Changed for correct centering
+  image[i].y = (Window.GetHeight() - image[i].image.GetHeight()) / 2; // Changed for correct centering
+  image[i].sprite.SetPosition(image[i].x, image[i].y, 0);
+}
+
+index = 1;
+fun boot_callback()
+{
+  if(index >= 19 + 1)
+  {
+    index = 1;
+  }
+  else
+  {
+    for(i = 1; i <= 19; i++)
+    {
+      if(index != i)
+      {
+        image[i].sprite.SetOpacity(0);
+      }
+      else
+      {
+        image[i].sprite.SetOpacity(1);
+        // Add centering here as well, in case resolution changes or for robustness
+        image[i].x = (Window.GetWidth() - image[i].image.GetWidth()) / 2; // Added for correct centering
+        image[i].y = (Window.GetHeight() - image[i].image.GetHeight()) / 2; // Added for correct centering
+        image[i].sprite.SetPosition(image[i].x, image[i].y, 0); // Re-apply position
+      }
+    }
+    index++;
+  }
+}
+
+Plymouth.SetRefreshFunction(boot_callback);
+Plymouth.SetQuitFunction(boot_callback);

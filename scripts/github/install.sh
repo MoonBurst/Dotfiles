@@ -97,6 +97,7 @@ if [ -d "${EXTRACTED_FOLDER}/.config" ]; then
     echo "-> Moving contents of .config/ to $HOME/.config"
     if [ -z "$DRY_RUN" ]; then
         mkdir -p "$HOME/.config" # Ensure destination exists
+        # Note: mv * moves contents, overwriting existing files/folders
         mv "${EXTRACTED_FOLDER}/.config/"* "$HOME/.config/"
     else
         echo "   [DRY-RUN] mkdir -p \"$HOME/.config\""
@@ -128,39 +129,39 @@ if [ -d "${EXTRACTED_FOLDER}/scripts" ]; then
     fi
 fi
 
-# 4. MOVE the .zshenv file (FIXED: Changed from ln -sfn to mv)
+# 4. SYMLINK the .zshenv file
 ZSHENV_SOURCE="${EXTRACTED_FOLDER}/.zshenv"
 ZSHENV_TARGET="$HOME/.zshenv"
 
-echo "[4/5] Moving .zshenv to $HOME/.zshenv (Prevents broken symlink cleanup issue)"
+echo "[4/5] Symlinking .zshenv to $HOME/.zshenv (Links to the extracted file)"
 if [ -f "$ZSHENV_SOURCE" ]; then
     if [ -z "$DRY_RUN" ]; then
-        # Use mv to move the file directly so cleanup doesn't break the configuration
-        mv "$ZSHENV_SOURCE" "$ZSHENV_TARGET"
-        echo "-> .zshenv moved successfully."
+        # Use ln -sfn to create a symbolic link, overwriting if it already exists
+        ln -sfn "$ZSHENV_SOURCE" "$ZSHENV_TARGET"
+        echo "-> .zshenv symlinked successfully."
     else
-        echo "   [DRY-RUN] mv \"$ZSHENV_SOURCE\" \"$ZSHENV_TARGET\""
-        echo "-> Move command printed (Dry Run)."
+        echo "   [DRY-RUN] ln -sfn \"$ZSHENV_SOURCE\" \"$ZSHENV_TARGET\""
+        echo "-> Symlink command printed (Dry Run)."
     fi
 else
-    echo "Warning: .zshenv not found at $ZSHENV_SOURCE. File not moved."
+    echo "Warning: .zshenv not found at $ZSHENV_SOURCE. File not linked."
 fi
 
-# 5. Final Cleanup (unchanged, but now safe)
+# 5. Final Cleanup (unchanged)
 echo "[5/5] Performing cleanup..."
 
 if [ -z "$DRY_RUN" ]; then
     rm -f "$TEMP_ARCHIVE"
-    # Remove the empty download directory after files have been moved out
-    rm -rf "$DOWNLOAD_DEST"
-    echo "-> Cleanup completed (Files deleted)."
+    # Note: $DOWNLOAD_DEST is kept intact here because it contains the linked .zshenv file
+    # We only remove the temporary ZIP file
+    echo "-> Cleanup completed (ZIP file deleted)."
 else
     echo "   [DRY-RUN] rm -f \"$TEMP_ARCHIVE\""
-    echo "   [DRY-RUN] rm -rf \"$DOWNLOAD_DEST\""
-    echo "-> Cleanup commands printed (Files preserved for inspection in $DOWNLOAD_DEST)."
+    echo "   [DRY-RUN] rm -rf \"$DOWNLOAD_DEST\" (NOTE: This would break the symlink if done outside dry-run!)"
+    echo "-> Cleanup commands printed (Files preserved for inspection)."
 fi
 
 echo ""
 echo "--- Installation Complete! ---"
 echo "Folders moved: .config, .local, scripts"
-echo "File moved: $ZSHENV_TARGET"
+echo "File symlinked: $ZSHENV_TARGET (Note: The source file is located in $EXTRACTED_FOLDER)"
