@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 crontab -l > ~/.config/cron/cron
 # --- List of directories and files to sync ---
