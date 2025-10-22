@@ -23,7 +23,7 @@ DIRECTORIES=(
   "$HOME/.local/share/gtk-4.0/"
   "$HOME/.local/share/themes/"
   "$HOME/.local/share/icons/"
-  "/etc/nixos/"
+  "$HOME/nixos-config/"
 )
 
 
