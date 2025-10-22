@@ -5,7 +5,6 @@ crontab -l > ~/.config/cron/cron
 DIRECTORIES=(
   "$CRON_TMP_DIR"
   "$HOME/scripts/"
-#  "$HOME/.config/cron/"
   "$HOME/.config/dunst/"
   "$HOME/.config/fastfetch/"
   "$HOME/.config/hypr/"
