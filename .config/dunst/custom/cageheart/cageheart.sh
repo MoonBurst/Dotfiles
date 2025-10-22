@@ -1,2 +1,2 @@
-#!/bin/bash
+#!/usr/bin/env bash
 play ~/.config/dunst/custom/cageheart/cagerheartsound.flac
