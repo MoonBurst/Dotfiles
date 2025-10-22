@@ -24,7 +24,9 @@ DIRECTORIES=(
   "$HOME/.local/share/gtk-4.0/"
   "$HOME/.local/share/themes/"
   "$HOME/.local/share/icons/"
+  "$HOME/nixos-config/"
 )
+
 
 # Navigate to the repository root
 cd "$HOME/scripts/" || { echo "Error: ~/scripts/ directory not found"; exit 1; }

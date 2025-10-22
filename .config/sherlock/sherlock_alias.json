@@ -17,7 +17,7 @@
     "Vesktop": {
         "name": "Discord",
         "icon": "discord",
-        "exec": "/usr/bin/vesktop --disable-gpu-memory-buffer-video-frames",
+        "exec": "/run/current-system/sw/bin/vesktop --disable-gpu-memory-buffer-video-frames",
         "keywords": "discord"
     }
 }

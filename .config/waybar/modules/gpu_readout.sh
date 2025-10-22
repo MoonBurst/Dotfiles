@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Enable strict mode: exit on error (-e), exit on unbound variables (-u),
 # set last exit code of pipeline to non-zero if any command fails (-o pipefail).

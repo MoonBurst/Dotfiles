@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 LOGO_DIR="${HOME}/.config/fastfetch"
 if [ ! -d "$LOGO_DIR" ]; then

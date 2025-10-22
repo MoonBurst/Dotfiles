@@ -28,7 +28,7 @@
         },
         		{
     "type": "custom",
-    "format": "\u001b[32m     System:\u001b[0m \u001b[34m             MoonBurst@ArchLinux\u001b[0m"
+    "format": "\u001b[32m     System:\u001b[0m \u001b[34m             MoonBurst@Nixos\u001b[0m"
 		},
 		{
 			"type": "command",
@@ -71,7 +71,7 @@
         
 		{
 		"type": "custom",
-		"format": "    \u001b[33m󰣇 ┌ OS\u001b[0m                  Arch Linux"
+		"format": "    \u001b[33m❄ ┌ OS\u001b[0m                  NixOS"
 		},
 
         {

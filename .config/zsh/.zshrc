@@ -109,4 +109,4 @@ cd() {
 
 # --- 9. Prompt Setting (should be near the very end) ---
 $XDG_CONFIG_HOME/fastfetch/fastfetch.sh
-PROMPT="%{$fg[yellow]%}[%D{%T}] %{$fg[blue]%}moonburst@archlinux: %{$fg[green]%}%~%{$reset_color%} $"
+PROMPT="%{$fg[yellow]%}[%D{%T}] %{$fg[blue]%}moonburst@nixos: %{$fg[green]%}%~%{$reset_color%} $"

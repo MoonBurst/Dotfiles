@@ -7,7 +7,7 @@
 @define-color red      			#ed8796;
 
 * {
-  font-family: JetBrains Mono, FontAwesome, Roboto, Helvetica, Arial, sans-serif,pso_font;
+  font-family: JetBrains Mono Font, FontAwesome, Roboto, Helvetica, Arial, sans-serif,pso_font;
   font-size: 15px;
   border-radius: 0.75em;
 }

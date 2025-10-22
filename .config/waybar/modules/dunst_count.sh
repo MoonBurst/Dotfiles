@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 # This script continuously monitors the Dunst notification daemon status (paused state and waiting count),

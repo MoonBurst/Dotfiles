@@ -16,7 +16,7 @@
 //    "custom/beats",
     "clock#day",
     "custom/weather",
-    "custom/pacman_updates",
+//    "custom/pacman_updates",
     "custom/dunst_count",
     "mpris"
     ],

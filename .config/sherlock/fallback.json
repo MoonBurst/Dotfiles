@@ -1,5 +1,204 @@
 [
     {
+        "name": "Calculator",
+        "type": "calculation",
+        "args": {
+            "capabilities": [
+                "calc.math",
+                "calc.units"
+            ]
+        },
+        "priority": 1
+    },
+
+    {
+        "name": "Clipboard",
+        "type": "clipboard-execution",
+        "args": {
+            "capabilities": [
+                "url",
+                "colors.hex",
+                "colors.rgb",
+                "colors.hsl",
+                "calc.math",
+                "calc.lengths",
+                "calc.weights",
+                "calc.temperatures"
+            ]
+        },
+        "priority": 1,
+        "home": true
+    },
+    {
+        "name": "App Launcher",
+        "alias": "app",
+        "type": "app_launcher",
+        "args": {},
+        "priority": 2,
+        "home": true
+    },
+
+    {
+        "name": "Kill Process",
+        "alias": "kill",
+        "type": "process",
+        "args": {},
+        "priority": 0
+    },
+    {
+        "name": "Power Management",
+        "alias": "pm",
+        "type": "command",
+        "args": {"commands": {
+            "Shutdown": {"icon": "system-shutdown", "exec": "systemctl poweroff", "search_string": "Poweroff;Shutdown"},
+            "Sleep": {"icon": "system-suspend", "exec": "systemctl suspend", "search_string": "Sleep;"},
+            "Lock": {"icon": "system-lock-screen", "exec": "swaylock -f -c 030303", "search_string": "Lock Screen;"},
+            "Reboot": {"icon": "system-reboot", "exec": "systemctl reboot", "search_string": "reboot"}
+        }},
+        "priority": 4
+    },
+    {
+        "name": "Debug",
+        "type": "debug",
+        "alias": "debug",
+        "args": {
+            "commands": {
+                "Show Errors": {
+                    "icon": "sherlock-process",
+                    "exec": "show_errors",
+                    "search_string": "debug;errors"
+                },
+                "Clear Cache": {
+                    "icon": "sherlock-process",
+                    "exec": "clear_cache",
+                    "search_string": "clear;cache;"
+                },
+                "Reset App Counts": {
+                    "icon": "sherlock-process",
+                    "exec": "reset_counts",
+                    "search_string": "reset;clear;counts;appcounts"
+                }
+            }
+        },
+        "priority": 0
+    },
+    {
+        "name": "Categories",
+        "alias": "cat",
+        "type": "categories",
+        "args": {
+            "categories": {
+                "Kill Processes": {
+                    "icon": "sherlock-process",
+                    "exec": "kill",
+                    "search_string": "terminate;kill;process"
+                },
+                "Debug": {
+                    "icon": "tools-report-bug",
+                    "icon_class": "reactive",
+                    "exec": "debug",
+                    "search_string": "debug;error"
+                }
+            }
+        },
+        "priority": 3,
+        "home": true
+    },
+        {
+    "name": "Session",
+    "alias": "session",
+    "type": "command",
+    "args": {
+        "commands": {
+            "Logout Sway": {
+                "icon": "logout",
+                "exec": "swaymsg exit",
+                "search_string": "logout log out exit sway session"
+            }
+        }
+    },
+    "priority": 1
+},
+    {
+        "name": "Utilities",
+        "alias": "colors",
+        "type": "command",
+        "args": {"commands": {
+            "Color Picker": {"icon": "colorgrab", "exec": "hyprpicker -a &", "search_string": "colorpicker"}
+        }},
+        "priority": 5
+    },
+    	{
+    "name": "OBS Studio",
+    "alias": "",
+    "type": "command",
+    "args": {
+        "commands": {
+            "Start Recording": {
+                "icon": "sherlock-record",
+                "exec": "obs --startrecording &",
+                "search_string": "recording;start recording;startrecording;obs studio;"
+            },
+            "Toggle Streaming": {
+                "icon": "sherlock-stop",
+                "exec": "obs-cli stream toggle --password 'moonpass' ",
+                "search_string": "streaming;stop streaming;stopstreaming;obs studio;"
+            }
+        }
+    },
+    "priority": 5
+},
+    	{
+    "name": "Dunst Toggle",
+    "alias": "dunst",
+    "type": "command",
+    "args": {
+        "commands": {
+            "Toggle Notifications": {
+                "icon": "notifications",
+                "exec": "dunstctl set-paused toggle",
+                "search_string": "dunst;toggle;notifications;notify;"
+				}
+			}
+		},
+		"priority": 5
+	},
+	   {
+    "name": "App Launcher",
+    "alias": "app",
+    "type": "app_launcher",
+    "args": {},
+    "priority": 2
+    },
+         {
+        "name": "Audacious",
+        "type": "audio_sink",
+        "args": { },
+        "async": true,
+        "priority": 1,
+        "spawn_focus": false
+    },
+        {
+    "name": "OBS Studio",
+    "alias": "",
+    "type": "command",
+    "args": {
+        "commands": {
+            "Start Recording": {
+                "icon": "sherlock-record",
+                "exec": "obs --startrecording &",
+                "search_string": "recording;start recording;startrecording;obs studio;"
+            },
+            "Toggle Streaming": {
+                "icon": "sherlock-stop",
+                "exec": "obs-cli stream toggle --password 'moonpass'",
+                "search_string": "streaming;stop streaming;stopstreaming;obs studio;"
+            }
+        }
+    },
+    "priority": 5
+    },
+        {
     "name": "Dictionary Lookup",
     "alias": "define",
     "type": "bulk_text",
@@ -21,181 +220,5 @@
     "async": true, 
     "args": {"icon": "wikipedia", "exec": "~/.config/sherlock/scripts/sherlock-wiki", "exec-args": "'{keyword}'"},
     "priority": 0 
-    },
-    {
-    "name": "OBS Studio",
-    "alias": "",
-    "type": "command",
-    "args": {
-        "commands": {
-            "Start Recording": {
-                "icon": "sherlock-record",
-                "exec": "obs --startrecording &",
-                "search_string": "recording;start recording;startrecording;obs studio;"
-            },
-            "Toggle Streaming": {
-                "icon": "sherlock-stop",
-                "exec": "obs-cli stream toggle --password 'moonpass'",
-                "search_string": "streaming;stop streaming;stopstreaming;obs studio;"
-            }
-        }
-    },
-    "priority": 5
-    },
-    {
-    "name": "Web Search",
-    "display_name": "Google Search",
-    "tag_start": "{keyword}",
-    "alias": "gg",
-    "type": "web_launcher",
-    "args": {"search_engine": "google", "icon": "google"},
-    "priority": 100
-    },
-    {
-    "name": "Calculator",
-    "type": "calculation",
-    "args": {
-        "capabilities": [
-            "calc.math",
-            "calc.units",
-            "calc.weights",
-            "calc.volumes",
-            "calc.temperatures"
-        ]
-    },
-    "priority": 1
-    },
-    {
-    "name": "Kill Process",
-    "alias": "kill",
-    "type": "process",
-    "args": { },
-    "priority": 6
-    },
-    {
-    "name": "App Launcher",
-    "alias": "app",
-    "type": "app_launcher",
-    "args": {},
-    "priority": 2
-    },
-         {
-        "name": "Audacious",
-        "type": "audio_sink",
-        "args": { },
-        "async": true,
-        "priority": 1,
-        "spawn_focus": false
-    },
-    	{
-    "name": "Dunst Toggle",
-    "alias": "dunst",
-    "type": "command",
-    "args": {
-        "commands": {
-            "Toggle Notifications": {
-                "icon": "notifications",
-                "exec": "dunstctl set-paused toggle",
-                "search_string": "dunst;toggle;notifications;notify;"
-				}
-			}
-		},
-		"priority": 5
-	},
-	{
-    "name": "OBS Studio",
-    "alias": "",
-    "type": "command",
-    "args": {
-        "commands": {
-            "Start Recording": {
-                "icon": "sherlock-record",
-                "exec": "obs --startrecording &",
-                "search_string": "recording;start recording;startrecording;obs studio;"
-            },
-            "Toggle Streaming": {
-                "icon": "sherlock-stop",
-                "exec": "obs-cli stream toggle --password 'moonpass' ",
-                "search_string": "streaming;stop streaming;stopstreaming;obs studio;"
-            }
-        }
-    },
-    "priority": 5
-},
-    {
-        "name": "Utilities",
-        "alias": "colors",
-        "type": "command",
-        "args": {"commands": {
-            "Color Picker": {"icon": "colorgrab", "exec": "hyprpicker -a &", "search_string": "colorpicker"}
-        }},
-        "priority": 5
-    },
-    {
-    "name": "Session",
-    "alias": "session",
-    "type": "command",
-    "args": {
-        "commands": {
-            "Logout Sway": {
-                "icon": "logout",
-                "exec": "swaymsg exit",
-                "search_string": "logout log out exit sway session"
-            }
-        }
-    },
-    "priority": 1
-},
-    {
-    "name": "Debug",
-    "type": "debug",
-    "alias": "debug",
-    "args": {
-        "commands": {
-            "Clear Cache": {
-                "icon": "sherlock-process",
-                "exec": "clear_cache",
-                "search_string": "clear;cache;"
-            },
-            "Reset App Counts": {
-                "icon": "sherlock-process",
-                "exec": "reset_counts",
-                "search_string": "reset;clear;counts;appcounts"
-            }
-        }
-    },
-    "priority": 0
-},
-    {
-        "name": "Power Management",
-        "alias": "pm",
-        "type": "command",
-        "args": {"commands": {
-            "Shutdown": {"icon": "system-shutdown", "exec": "systemctl poweroff", "search_string": "Poweroff;Shutdown"},
-            "Sleep": {"icon": "system-suspend", "exec": "systemctl suspend", "search_string": "Sleep;"},
-            "Lock": {"icon": "system-lock-screen", "exec": "swaylock -f -c 030303", "search_string": "Lock Screen;"},
-            "Reboot": {"icon": "system-reboot", "exec": "systemctl reboot", "search_string": "reboot"}
-        }},
-        "priority": 4
-    },
-      {
-    "name": "App Launcher",
-    "alias": "app",
-    "tag_start": null,
-    "tag_end": null,
-    "display_name": null,
-    "on_return": null,
-    "next_content": null,
-    "type": "app_launcher",
-    "priority": 3.0,
-    "exit": true,
-    "shortcut": true,
-    "spawn_focus": true,
-    "async": false,
-    "home": "Home",
-    "args": {},
-    "binds": null,
-    "actions": null,
-    "add_actions": null
-  }
+    }
 ]
