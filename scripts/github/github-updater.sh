@@ -73,7 +73,7 @@ else
     unset GIT_DIR
 fi
 
----
+
 
 # ================================================================
 # 2. Sync the NixOS Config Repo
