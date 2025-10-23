@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # --- Define Repository Paths ---
-# SCRIPTS_REPO now points to the correct location for a home-directory-based bare repo.
+# SCRIPTS_REPO points to the .git directory of your home-based dotfiles repo (~/.git).
 SCRIPTS_REPO="$HOME/.git" 
 NIXOS_REPO="$HOME/nixos-config/"
 PUSH_BRANCH="main" 
@@ -33,7 +33,6 @@ DIRECTORIES=(
 
 # ================================================================
 # 1. Sync the Dotfiles Repository (located at ~/.git)
-#    This section operates without changing the current directory (~).
 # ================================================================
 
 echo "================== Syncing Dotfiles Repo =================="
@@ -43,16 +42,13 @@ GIT_DIR_PATH="$SCRIPTS_REPO"
 # Check if the repository exists (the ~/.git folder)
 if [ ! -d "$GIT_DIR_PATH" ]; then
     echo "Error: Git repository not found at $SCRIPTS_REPO. Please ensure you have run 'git init --bare' inside ~."
-    # If the dotfiles repo doesn't exist, we skip this section but continue to NixOS sync.
 else
 
     # --- Set up the bare repository environment ---
-    # This configuration makes Git look for the .git folder in $HOME/.git, 
-    # and manages files across the entire $HOME directory.
     export GIT_WORK_TREE="$HOME"
     export GIT_DIR="$GIT_DIR_PATH"
 
-    # Loop through external paths and force-add their contents (relative to $HOME)
+    # Loop through paths and add their contents (relative to $HOME)
     for RELATIVE_PATH in "${DIRECTORIES[@]}"; do
         FULL_PATH="$HOME/$RELATIVE_PATH"
         if [ -e "$FULL_PATH" ]; then
@@ -76,6 +72,8 @@ else
     unset GIT_WORK_TREE
     unset GIT_DIR
 fi
+
+---
 
 # ================================================================
 # 2. Sync the NixOS Config Repo
@@ -101,7 +99,7 @@ echo "================== Syncing NixOS Config Repo =================="
         git push origin "$PUSH_BRANCH"
     fi
 ) 
-# The subshell automatically returns the current directory to what it was before (~).
+# The subshell exits, leaving the current directory at ~
 
 echo ""
 echo "============== All synchronization tasks complete. =============="
