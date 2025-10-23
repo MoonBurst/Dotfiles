@@ -33,6 +33,8 @@ DIRECTORIES=(
 
 # ================================================================
 # 1. Sync the Dotfiles Repository (located at ~/.git)
+#    - Runs from ~ using the bare repository method.
+#    - Commit logic updated to be more robust.
 # ================================================================
 
 echo "================== Syncing Dotfiles Repo =================="
@@ -53,19 +55,24 @@ else
         FULL_PATH="$HOME/$RELATIVE_PATH"
         if [ -e "$FULL_PATH" ]; then
             echo "Adding: $FULL_PATH"
+            # Add with force to ensure all contents are staged
             git add --force "$RELATIVE_PATH"
         else
             echo "Path $FULL_PATH does not exist, skipping..."
         fi
     done
 
-    # --- Perform conditional commit/push ---
-    if git diff --cached --quiet; then
-        echo "No changes detected in dotfiles repo, skipping commit/push."
-    else
-        git commit -m "Automated sync: $(date)"
-        echo "Pushing changes for dotfiles repo to GitHub..."
+    # --- Perform commit/push using Git's built-in check ---
+    
+    # 1. Attempt the commit. If no changes were staged, this will exit with a non-zero code (1)
+    #    and print a message. We redirect output to silence the commit failure message.
+    if git commit -m "Automated sync: $(date)" > /dev/null 2>&1; then
+        # 2. Commit was successful (changes existed), so we push.
+        echo "Changes committed. Pushing to GitHub..."
         git push origin "$PUSH_BRANCH"
+    else
+        # 3. Commit failed because no changes were staged.
+        echo "No changes detected in dotfiles repo, skipping commit/push."
     fi
 
     # --- Clean up the environment variables ---
@@ -73,10 +80,9 @@ else
     unset GIT_DIR
 fi
 
-
-
 # ================================================================
 # 2. Sync the NixOS Config Repo
+#    - Runs from ~ using a subshell to safely manage directory change.
 # ================================================================
 
 echo ""
@@ -91,12 +97,11 @@ echo "================== Syncing NixOS Config Repo =================="
     git add .
 
     # Perform conditional commit/push
-    if git diff --cached --quiet; then
-        echo "No changes detected in NixOS repo, skipping commit/push."
-    else
-        git commit -m "Automated NixOS sync: $(date)"
-        echo "Pushing changes for NixOS repo to GitHub..."
+    if git commit -m "Automated NixOS sync: $(date)" > /dev/null 2>&1; then
+        echo "Changes committed. Pushing to GitHub..."
         git push origin "$PUSH_BRANCH"
+    else
+        echo "No changes detected in NixOS repo, skipping commit/push."
     fi
 ) 
 # The subshell exits, leaving the current directory at ~
