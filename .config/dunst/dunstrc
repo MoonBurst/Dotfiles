@@ -405,37 +405,37 @@ enable_posix_regex=true
 #    summary = "foobar"
 #    skip_display = true
 
-[Luster Dawn]
+[Luster Dawn]  
 desktop_entry="vesktop|Electron"
 summary="Luster Dawn"
 frame_color="#e041de"
-new_icon= "~/.config/dunst/custom/luster_dawn/luster_dawn.png"
-script="/run/current-system/sw/bin/play ~/.config/dunst/custom/luster_dawn/lustersound.flac"
+new_icon= ~/.config/dunst/custom/luster_dawn/luster_dawn.png
+script= ~/.config/dunst/custom/luster_dawn/luster_dawn.sh
 
 [Solar Sonata]  
 desktop_entry="vesktop|Electron"
 summary="Solar Sonata"
 frame_color="#FFFF33"
-new_icon="~/.config/dunst/custom/solar_sonata/solar_sonata.png"
-script ="~/.config/dunst/custom/solar_sonata/solar_sonata.sh"
+new_icon= ~/.config/dunst/custom/solar_sonata/solar_sonata.png
+script= ~/.config/dunst/custom/solar_sonata/solar_sonata.sh
 [Apogee]  
 desktop_entry="vesktop|Electron"
 summary="Apogee"
 frame_color="#0CD0CD"
-new_icon= "~/.config/dunst/custom/apogee/apogee.png"
+new_icon= ~/.config/dunst/custom/apogee/apogee.png
 #script ="/path/to/your/script.sh"
 [Cageheart]  
 desktop_entry="vesktop|Electron"
 summary="Cageheart"
 frame_color="#8ad5a6"
-new_icon= "~/.config/dunst/custom/cageheart/cageheart.png"
-script= "~/.config/dunst/custom/cageheart/cageheart.sh"
+new_icon= ~/.config/dunst/custom/cageheart/cageheart.png
+script= ~/.config/dunst/custom/cageheart/cagerheart.sh
 [Olivia]  
 desktop_entry="vesktop"
 summary="Olivia"
 frame_color="#18FFD5"
-new_icon= "~/.config/dunst/custom/olivia/olivia.png"
-script= "~/.config/dunst/custom/olivia/olivia.sh"
+new_icon= ~/.config/dunst/custom/olivia/olivia.png
+script= ~/.config/dunst/custom/olivia/olivia.sh
 
 
 
@@ -468,4 +468,15 @@ script= "~/.config/dunst/custom/olivia/olivia.sh"
 #    set_stack_tag = "volume"
 #
 # vim: ft=cfg
+
+[internal-script-trigger]
+    # Use a unique application name to trigger this rule manually
+    appname = "dunst_internal_trigger"
+    
+    # Specify the script you want to execute
+    script=~/.config/dunst/custom/luster_dawn/luster_dawn.sh
+    
+    # IMPORTANT: Set the format to an empty string to hide the notification
+    format = "" 
+    
 
