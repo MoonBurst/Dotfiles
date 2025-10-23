@@ -22,7 +22,7 @@ app_paths = []
 width = 700
 height = 500
 gsk_renderer = "cairo"
-icon_paths = ["~/.local/share/icons/hicolor/128x128/apps/","/home/moonburst/.local/share/icons/Avalon-Icons/apps/48/" ]
+icon_paths = ["~/.local/share/icons/hicolor/128x128/apps/","~/.local/share/icons/Avalon-Icons/apps/48/" ]
 icon_size = 32
 use_base_css = true
 opacity = 1.0
@@ -44,12 +44,12 @@ modifier = "control"
 exec_inplace = "control-return"
 
 [files]
-config = "/home/moonburst/.config/sherlock/config.toml"
-css = "/home/moonburst/.config/sherlock/main.css"
-fallback = "/home/moonburst/.config/sherlock/fallback.json"
-alias = "/home/moonburst/.config/sherlock/sherlock_alias.json"
-ignore = "/home/moonburst/.config/sherlock/sherlockignore"
-actions = "/home/moonburst/.config/sherlock/sherlock_actions.json"
+config = "~/.config/sherlock/config.toml"
+css = "~/.config/sherlock/main.css"
+fallback = "~/.config/sherlock/fallback.json"
+alias = "~/.config/sherlock/sherlock_alias.json"
+ignore = "~/.config/sherlock/sherlockignore"
+actions = "~/.config/sherlock/sherlock_actions.json"
 
 [runtime]
 multi = true
@@ -60,7 +60,7 @@ daemonize = true
 
 [caching]
 enable = false
-cache = "/home/moonburst/.cache/sherlock/desktop_cache.bin"
+cache = "~/.cache/sherlock/desktop_cache.bin"
 
 [expand]
 enable = false
