@@ -405,12 +405,12 @@ enable_posix_regex=true
 #    summary = "foobar"
 #    skip_display = true
 
-[Luster Dawn]  
+[Luster Dawn]
 desktop_entry="vesktop|Electron"
 summary="Luster Dawn"
 frame_color="#e041de"
 new_icon= "~/.config/dunst/custom/luster_dawn/luster_dawn.png"
-script ="bash ~/.config/dunst/custom/luster_dawn/luster_dawn.sh"
+script="/run/current-system/sw/bin/play ~/.config/dunst/custom/luster_dawn/lustersound.flac"
 
 [Solar Sonata]  
 desktop_entry="vesktop|Electron"
