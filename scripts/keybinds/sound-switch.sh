@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # strict mode
 # set -euo pipefail
 # IFS=$'\n\t'

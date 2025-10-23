@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Check if OBS Studio is currently streaming
 # This is a simplified check. A more robust solution might involve OBS WebSocket or similar.

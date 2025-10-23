@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 echo Please enter your sudo password if you are prompted to do so.
 echo Uninstalling the moonburst-wiggle theme...
 sudo update-alternatives --quiet --remove default.plymouth /usr/share/plymouth/themes/moonburst-wiggle/moonburst-wiggle.plymouth

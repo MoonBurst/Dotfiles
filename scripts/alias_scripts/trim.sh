@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 LOGO_DIR="/home/moonburst/.config/fastfetch"
 

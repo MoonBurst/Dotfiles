@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -x # THIS LINE IS NOW UNCOMMENTED BY DEFAULT.
          # When you run the script, it will print each command as it's executed.
          # PLEASE COPY ALL OF THIS OUTPUT AND PASTE IT BACK TO ME.

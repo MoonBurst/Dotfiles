@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 read -r -d '' SED <<SED_SCRIPT
 #s/^\-\- \[(.*?)\] /--
 s^: /me^^g

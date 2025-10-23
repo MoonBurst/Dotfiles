@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Configuration
 BASE_DOWNLOAD_DIR="$HOME/Music/Music.lossless/Music/000 MP3s need updated" # Top-level directory for all downloads

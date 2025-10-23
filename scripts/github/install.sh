@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Custom Installation Script for MoonBurst/Dotfiles
 # This script executes a specific sequence of download, extraction, and move operations.

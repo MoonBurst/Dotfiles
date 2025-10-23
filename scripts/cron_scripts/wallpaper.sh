@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -z "$SWAYSOCK" ]; then
     RUNTIME_DIR="/run/user/$(id -u)" 

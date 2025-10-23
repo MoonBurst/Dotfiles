@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Get the sink ID for the specified application dynamically
 get_sink_id() {

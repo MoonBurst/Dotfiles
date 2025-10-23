@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Author: Ruben Lopez (Logon84) <rubenlogon@yahoo.es>
 # Description: A shell script to switch pipewire sinks (outputs). Optinally it requires notify-send.sh for showing notifications.
 

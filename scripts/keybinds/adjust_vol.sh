@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Function to check the default audio sink and adjust the volume accordingly
 check_and_set_volume() {

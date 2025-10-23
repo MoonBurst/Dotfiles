@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # A script to manage Zsh history, including removing duplicates and
 # interactively deleting entries.

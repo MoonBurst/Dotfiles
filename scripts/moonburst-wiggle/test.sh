@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 echo Please enter your sudo password if you are prompted to do so.
 echo Testing...
 sudo plymouthd

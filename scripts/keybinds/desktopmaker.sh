@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This script is designed to be called from a file manager's context menu.
 # It creates a .desktop file for the selected executable or script.

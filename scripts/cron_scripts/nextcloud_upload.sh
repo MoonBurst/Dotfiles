@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 RCLONE_REMOTE="NextCloud"
 NEXTCLOUD_USER="MoonBurst"

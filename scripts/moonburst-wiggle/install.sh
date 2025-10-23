@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 echo Please enter your sudo password if you are prompted to do so.
 echo Installing the moonburst-wiggle theme...
 sudo mkdir /usr/share/plymouth/themes/moonburst-wiggle
