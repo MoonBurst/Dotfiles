@@ -5,7 +5,7 @@ if [[ ":$FPATH:" != *":/home/moonburst/.config/zsh/completions:"* ]]; then expor
 # --- 0. Load Colors Early ---
 autoload -Uz colors && colors
 # --- 1. Zsh Core Settings (setopt, history behavior, zle) ---
-# History settings (HISTFILE is set in ~/.zshenv)
+HISTFILE="${ZDOTDIR}/history"
 setopt appendhistory
 HISTSIZE=1000
 SAVEHIST=1000
@@ -106,6 +106,48 @@ export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 cd() {
     builtin cd "$@" && ls
 }
+
+
+
+1time() {
+if [ "$#" -eq 0 ]; then
+        echo "Usage: nix-temp-run <command> [args...]"
+        return 1
+    fi
+
+    local COMMAND="$1"
+    shift 
+    local ARGS="$@" 
+
+    local TEMP_HOME
+    TEMP_HOME=$(mktemp -d)
+    local TEMP_TMPDIR
+    TEMP_TMPDIR=$(mktemp -d)
+    
+    # 🌟 Determine the correct Nixpkgs attribute path 🌟
+    # Default to the simple name. For 'thunar', we know it needs 'xfce.thunar'.
+    # We will use the simplest path first, which works for the majority of packages.
+    
+    local NIXPKGS_ATTR="$COMMAND"
+    if [ "$COMMAND" = "thunar" ]; then
+        NIXPKGS_ATTR="xfce.thunar"
+    fi
+    # You would add other known exceptions here (e.g., if 'firefox' was 'mozilla.firefox')
+    
+    echo "Running command with temporary HOME=$TEMP_HOME and TMPDIR=$TEMP_TMPDIR..."
+    
+    # 💥 Fix: Using -p (which is a shorthand for -I <nixpkgs> -A pkgs.<attr>).
+    # We use the calculated NIXPKGS_ATTR
+    
+    HOME="$TEMP_HOME" \
+    TMPDIR="$TEMP_TMPDIR" \
+    nix-shell -p "$NIXPKGS_ATTR" --pure --run "$COMMAND $ARGS"
+
+    echo "Cleaning up temporary directories..."
+    rm -rf "$TEMP_HOME"
+    rm -rf "$TEMP_TMPDIR"
+}
+
 
 # --- 9. Prompt Setting (should be near the very end) ---
 $XDG_CONFIG_HOME/fastfetch/fastfetch.sh

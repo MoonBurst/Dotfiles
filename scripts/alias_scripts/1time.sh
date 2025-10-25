@@ -1,23 +1,24 @@
-#!/usr/bin/env bash
+nix-temp-run() {
+    if [ "$#" -eq 0 ]; then
+        echo "Usage: nix-temp-run <command> [args...]"
+        return 1
+    fi
 
-# This script runs 'nix-shell -p' and automatically runs the first package
-# if no explicit --run argument is provided.
+    # 1. Create temporary directories in RAM (typically /tmp)
+    local TEMP_HOME
+    TEMP_HOME=$(mktemp -d)
+    local TEMP_TMPDIR
+    TEMP_TMPDIR=$(mktemp -d)
 
-set -e
-
-# Set the temporary XDG variables for this specific execution.
-XDG_CACHE_HOME="/tmp/nix-1time-cache"
-XDG_CONFIG_HOME="/tmp/nix-1time-config"
-
-# Check if the user only provided a package name (the first argument).
-if [ $# -eq 1 ]; then
-    PACKAGE_NAME="$1"
+    # 2. Run the command with the temporary environment variables set.
+    # The 'nix_auto_run=1' only applies if the command is not in the PATH.
+    echo "Running command with temporary HOME=$TEMP_HOME and TMPDIR=$TEMP_TMPDIR..."
     
-    # Inject '-p' flag and a '--run' command to execute the package immediately.
-    # Example: '1time thunar' becomes 'nix-shell -p thunar --run "thunar"'
-    exec nix-shell -p "$PACKAGE_NAME" --run "$PACKAGE_NAME"
-else
-    # If the user provided more arguments (e.g., '1time thunar --run "thunar &"'), 
-    # just inject '-p' and pass everything else through.
-    exec nix-shell -p "$@"
-fi
+    # We execute the command with arguments, respecting the temporary environment
+    HOME="$TEMP_HOME" TMPDIR="$TEMP_TMPDIR" NIX_AUTO_RUN=1 "$@"
+
+    # 3. Clean up the temporary directories when the command exits
+    echo "Cleaning up temporary directories..."
+    rm -rf "$TEMP_HOME"
+    rm -rf "$TEMP_TMPDIR"
+}
