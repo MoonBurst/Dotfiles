@@ -1,12 +1,12 @@
 [
-  {
+{
     "name": "App Launcher",
     "alias": "app",
     "type": "app_launcher",
+    "args": {},
     "priority": 2,
-    "home": true,
-    "args": {}
-  },
+    "home": "Home"
+},
   {
     "name": "Audacious",
     "type": "audio_sink",
@@ -16,82 +16,112 @@
     "spawn_focus": false
   },
   {
-    "name": "Calculator",
-    "type": "calculation",
-    "args": {
-      "capabilities": [
-        "calc.math",
-        "calc.units"
-      ]
-    },
-    "priority": 1
-  },
-  {
     "name": "Categories",
     "alias": "cat",
     "type": "categories",
     "args": {
-      "categories": {
         "Kill Processes": {
-          "icon": "sherlock-process",
-          "exec": "kill",
-          "search_string": "terminate;kill;process"
+            "icon": "sherlock-process",
+            "icon_class": "reactive",
+            "exec": "kill",
+            "search_string": "terminate;kill;process"
         },
-        "Debug": {
-          "icon": "tools-report-bug",
-          "icon_class": "reactive",
-          "exec": "debug",
-          "search_string": "debug;error"
+        "Power Menu": {
+            "icon": "battery-full-symbolic",
+            "icon_class": "reactive",
+            "exec": "pm",
+            "search_string": "powermenu;"
         }
-      }
     },
     "priority": 3,
-    "home": true
-  },
-  {
+    "home": "Home"
+},
+{
+    "name": "Calculator",
+    "type": "calculation",
+    "args": {
+        "capabilities": [
+            "calc.math",
+            "calc.units"
+        ]
+    },
+    "priority": 1
+},
+{
     "name": "Clipboard",
     "type": "clipboard-execution",
     "args": {
-      "capabilities": [
-        "url",
-        "colors.hex",
-        "colors.rgb",
-        "colors.hsl",
-        "calc.math",
-        "calc.lengths",
-        "calc.weights",
-        "calc.temperatures"
-      ]
+        "capabilities": [
+            "url",
+            "colors.hex",
+            "colors.rgb",
+            "colors.hsl",
+            "calc.math",
+            "calc.lengths",
+            "calc.weights",
+            "calc.temperatures"
+        ]
     },
     "priority": 1,
-    "home": true
-  },
-  {
+    "home": "Home"
+},
+{
     "name": "Debug",
     "type": "debug",
     "alias": "debug",
     "args": {
-      "commands": {
-        "Show Errors": {
-          "icon": "sherlock-process",
-          "exec": "show_errors",
-          "search_string": "debug;errors"
+        "commands": {
+            "Clear Cache": {
+                "icon": "sherlock-process",
+                "exec": "clear_cache",
+                "search_string": "clear;cache;"
+            },
+            "Reset App Counts": {
+                "icon": "sherlock-process",
+                "exec": "reset_counts",
+                "search_string": "reset;clear;counts;appcounts"
+            }
         },
-        "Clear Cache": {
-          "icon": "sherlock-process",
-          "exec": "clear_cache",
-          "search_string": "clear;cache;"
-        },
-        "Reset App Counts": {
-          "icon": "sherlock-process",
-          "exec": "reset_counts",
-          "search_string": "reset;clear;counts;appcounts"
-        }
-      }
+        "actions": [
+            {
+                "name": "Clear Cache",
+                "icon": "sherlock-process",
+                "exec": "clear_cache",
+                "method": "debug"
+            },
+            {
+                "name": "Reset App Counts",
+                "icon": "sherlock-process",
+                "exec": "reset_counts",
+                "method": "debug"
+            }
+        ]
     },
     "priority": 0
-  },
-  {
+},
+{
+    "name": "Wikipedia Search",
+    "alias": "wiki",
+    "type": "bulk_text",
+    "async": true,
+    "on_return": "copy",
+    "args": {
+        "icon": "wikipedia",
+        "exec": "~/.config/sherlock/scripts/sherlock-wiki",
+        "exec-args": "{keyword}"
+    },
+    "priority": 0,
+    "shortcut": false
+},
+{
+    "name": "Kill Process",
+    "alias": "kill",
+    "type": "process",
+    "args": {},
+    "priority": 6,
+    "home": "Search"
+},
+    {
     "name": "Dictionary Lookup",
     "alias": "define",
     "type": "bulk_text",
@@ -120,14 +150,7 @@
     },
     "priority": 5
   },
-  {
-    "name": "Kill Process",
-    "alias": "kill",
-    "type": "process",
-    "args": {},
-    "priority": 0
-  },
-  {
+   {
     "name": "OBS Studio",
     "alias": "",
     "type": "command",
@@ -206,18 +229,7 @@
       }
     },
     "priority": 5
-  },
-  {
-    "name": "Wikipedia Search",
-    "alias": "wiki",
-    "type": "bulk_text",
-    "on_return": "next",
-    "async": true,
-    "args": {
-      "icon": "wikipedia",
-      "exec": "/home/moonburst/.config/sherlock/scripts/sherlock-wiki",
-      "exec-args": "'{keyword}'"
-    },
-    "priority": 0
   }
-]
+  
+  
+  ]
