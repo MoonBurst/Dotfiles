@@ -1,2 +1,187 @@
-: 1761359242:0;cat list
-: 1761359327:0;./scripts/github/github-updater.sh
+cat list
+./scripts/github/github-updater.sh
+nh clean
+sudo ncdu /
+nix-store --optimise
+cd scripts/cron_scripts
+./mv-.desktop-to-applications.sh
+sudo nix-collect-garbage -d
+1time openrgb
+sudo nixos-rebuild switch
+clear
+sudo nixos-rebuild switch
+sudo udevadm control --reload-rules\
+sudo udevadm trigger
+sudo modprobe i2c-dev\
+sudo modprobe i2c-piix4
+sudo nixos-rebuild switch
+openrgb
+sudo nixos-rebuild switch
+openrgb
+1time openrgb
+sudo nixos-rebuild switch
+pidof dunst
+pkill dunst
+pidof dunst
+dunst -verbosity debug
+pkill dunst
+dunst -verbosity debug
+nix-shell -p libnotify --run 'notify-send -a "vesktop" "Luster Dawn" "test"'
+script="/run/current-system/sw/bin/play /home/username/.config/dunst/custom/luster_dawn/lustersound.flac"
+script="/run/current-system/sw/bin/paplay /home/username/.config/dunst/custom/luster_dawn/lustersound.flac"
+systemctl --user stop dunst.service
+killall dunst
+dunst -verbosity debug
+# Replace 'main_user_dbus_address' and 'main_user_display' with the values you copied.\
+# Replace 'Your Notification' with the actual text.\
+sudo -u luster_dawn \\
+  DISPLAY=**main_user_display** \\
+  DBUS_SESSION_BUS_ADDRESS=**main_user_dbus_address** \\
+  notify-send "Notification from Luster Dawn" "The Electron app running as Luster Dawn sent this."
+sudo -u luster_dawn \\
+  DISPLAY=:0 \\
+  DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus \\
+  notify-send "Notification from Luster Dawn" "The Electron app running as Luster Dawn sent this."
+# This command is executed by the process running as 'luster_dawn'\
+sudo -u **moonburst** \\
+    DISPLAY=:0 \\
+    DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus \\
+    notify-send \\
+        --app-name="dunst_internal_trigger" \\
+        " " " "
+dunstify send "Luster Dawn"
+dunstify "Luster Dawn" "test"
+dunstify "Luster Dawn" "test" --electron
+dunstify "Luster Dawn" "test"
+dunstify \\
+    --appname="Vesktop" \\
+    "New Message" \\
+    "Hey Moonburst, check out this sweet new feature
+dunstify \
+    --appname="Vesktop" \
+    "New Message" \
+    "Hey Moonburst, check out this sweet new feature\
+
+sudo -u **moonburst** \\
+    DISPLAY=:0 \\
+    DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" \\
+    **/path/to/dunstify** --appname="Vesktop" "Discord" "Test."
+/usr/local/bin/notify_moonburst.sh "Discord" "Test from Vesktop" "Vesktop"
+dunst -verbosity debug
+pidof dunst
+killall dunst
+dunst -verbosity debug
+journalctl --user -u dunst -e
+journalctl -f
+dunstctl debug
+dunst -print
+journalctl --user -u dunst.service -f
+journalctl --user -f
+cd .config/dunst/custom/luster_dawn
+./luster_dawn.sh
+dunst -dbg
+killal dunst
+dunst -dbg
+killal dunst
+dunst -dbg
+killall dunst
+pkill dunst
+dunst
+pkill dunst
+dunst
+which paplay
+pkill dunst
+dunst
+pkill dunst
+systemctl status dunst
+dunstctl
+dunstctl reload
+dunstctl rules
+dunstctl help
+dunstctl debug
+dunstctl reload
+journalctl -f
+which bash
+journalctl -f
+dunstctl reload
+ls -l /home/moonburst/.config/dunst/custom/luster_dawn/luster_dawn.sh
+dunstctl reload
+/run/current-system/sw/bin/paplay /home/moonburst/.config/dunst/custom/luster_dawn/lustersound.flac
+which paplay
+dunstctl reload
+systemctl --user restart dunst
+dunstctl reload
+journalctl -f -p err..emerg
+journalctl -f
+free -h
+journalctl -f
+sudo nixos-rebuild switch
+gamescope -- glxgears
+1time gamescope -- glxgears
+sudo nixos-rebuild switch
+cliphist list
+cliphist 630 | wl-copy
+cliphist list 630 | wl-copy
+sudo nixos-rebuild switch
+reboot now
+: 1761423986:0;sudo nixos-rebuild switch
+: 1761424190:0;ls
+: 1761424195:0;cd /mnt
+: 1761424197:0;cd temp_btrfs_check
+: 1761424198:0;ls
+: 1761424205:0;lsblk -f
+: 1761424213:0;sudo mount sda /mnt/temp_btrfs_check
+: 1761424223:0;sudo mount /dev/sda /mnt/temp_btrfs_check
+: 1761424416:0;pidof openrgb
+: 1761424419:0;pkill openrgb
+: 1761424499:0;sudo nixos-rebuild switch
+: 1761424649:0;which polkit-agent-helper-1
+: 1761424658:0;polkit-agent-helper-1 &
+: 1761424665:0;/run/wrappers/bin/polkit-agent-helper-1 &
+: 1761424673:0;polkit-agent-helper-1
+: 1761424717:0;/run/current-system/sw/libexex/polkit-gnome-authentication-agent-1
+: 1761424768:0;polkit-agent-helper
+: 1761424769:0;polkit-agent-helper-1
+: 1761424773:0;polkit-agent-helper-1 --help
+: 1761424788:0;polkit-kde-agent
+: 1761424804:0;polkit-agent-helper-1
+: 1761424829:0;journalctl -b | grep polkit
+: 1761424857:0;polkit-agent-helper-1
+: 1761424885:0;gnome.gnome-polkit
+: 1761424927:0;# This will show the actual executable path in the Nix store:\
+readlink -f $(which polkit-kde-authentication-agent-1)
+: 1761424957:0;/run/current-system/sw/bin/polkit-kde-authentication-agent-1 &
+: 1761424989:0;nix-store -q --realize $(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1
+: 1761425008:0;$(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1 &
+: 1761425035:0;(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1 &
+: 1761425042:0;$(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1 &
+: 1761425058:0;$(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/libexec/polkit-kde-authentication-agent-1 &
+: 1761425102:0;sudo nixos-rebuild switch
+: 1761425235:0;fchat-horizon
+: 1761425260:0;pass f-list.net
+: 1761425324:0;ps aux | grep -E 'gnome-keyring-daemon|kwalletd|secretservice|keepassxc'
+: 1761425355:0;fchat-horizon --add-flags "--password-store=gnome-libsecret" 
+: 1761425416:0;sudo nixos-rebuild switch
+: 1761425490:0;swaymsg exit
+: 1761425672:0;journalctl -f
+: 1761431772:0;/home/moonburst/.config/sherlock/scripts/sherlock-clp | sherlock | cliphist decode | wl-copy
+: 1761431796:0;/home/moonburst/.config/sherlock/scripts/sherlock-clp | sherlock | xargs -r cliphist decode | wl-copy
+: 1761431809:0;swaymsg reload
+: 1761435534:0;nix-store --query --requisites
+: 1761435550:0;1time fastfetch
+: 1761435593:0;nix-store --query --requisites /run/current-system \\
+| grep -v 'nixos-system' \\
+| cut -d- -f2- \\
+| grep '([0-9]{1,}\.)+[ 0-9]{1,}' \\
+| grep -v '\-doc$|\-man$|\-info$|\-dev$|\-bin$' \\
+| sort -u \\
+| wc -l
+: 1761435612:0;nix-store --query --requisites /run/current-system \\
+| cut -d- -f2- \\
+| grep -v 'nixos-system-nixos-' \\
+| grep -E '([0-9]{1,}\.)+[0-9]{1,}' \\
+| grep -vE '\-(doc|man|info|dev|bin)$' \\
+| sort -u \\
+| wc -l
+: 1761435771:0;watch fastfetch
+: 1761437277:0;./scripts/github/github-updater.sh

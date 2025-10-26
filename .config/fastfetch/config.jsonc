@@ -42,6 +42,22 @@
 			"keyColor": "green",
 			"text": "glxinfo | grep 'OpenGL renderer' | sed -E 's/^OpenGL renderer string: ([^(]+).*/\\1/'"
 		},
+		{
+    "type": "gpu",
+    "key": "󰾲 ├ GPU                ",
+    "keyColor": "green",
+    "format": "{name}",
+    "replace": [
+        {
+            "old": "Discrete",
+            "new": ""
+        },
+        {
+            "old": "discrete",
+            "new": ""
+        }
+    ]
+},
         {
             "type": "memory",
             "key": " ├ Memory             ",
@@ -86,6 +102,14 @@
             "keyColor": "yellow",
             "text": "pacman -Q mesa | awk '{print $1, $2}' | sed -E 's/_.*//'"
         },
+        // New Vulkan module to display only the driver part
+{
+    "type": "vulkan",
+    "key": " ├ GPU Driver          ",
+    "keyColor": "yellow",
+    "format": "{driver}",
+    "keyColor": "yellow"
+},
         {
             "type": "packages",
             "key": "󰏖 └ Packages            ",
@@ -116,6 +140,13 @@
             "keyColor": "magenta",
             "text": "last_updated=$(stat -c %Y /var/lib/pacman/sync); uptime_since_update=$(( $(date +%s) - $last_updated )); printf \"Last Updated %dd %dh %dm ago\\n\" $(($uptime_since_update/86400)) $(($uptime_since_update%86400/3600)) $(($uptime_since_update%3600/60))"
         },
+        // Fixed: Checks the last modified time of the system profile
+{
+    "type": "command",
+    "key": " └  System Build Age   ",
+    "keyColor": "magenta",
+    "text": "date -d @$(stat -c %Y /run/current-system) +'%Y-%m-%d %H:%M:%S'"
+},
         {
             "type": "custom",
             "format": "\u001b[35m└─────────────────────────────────────────────────────┘"

@@ -1,2 +1,3 @@
-#!/usr/bin/env bash
-play ~/.config/dunst/custom/luster_dawn/lustersound.flac
+#!/bin/sh
+
+/run/current-system/sw/bin/paplay ~/.config/dunst/custom/luster_dawn/lustersound.flac
