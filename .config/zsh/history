@@ -124,64 +124,408 @@ cliphist 630 | wl-copy
 cliphist list 630 | wl-copy
 sudo nixos-rebuild switch
 reboot now
-: 1761423986:0;sudo nixos-rebuild switch
-: 1761424190:0;ls
-: 1761424195:0;cd /mnt
-: 1761424197:0;cd temp_btrfs_check
-: 1761424198:0;ls
-: 1761424205:0;lsblk -f
-: 1761424213:0;sudo mount sda /mnt/temp_btrfs_check
-: 1761424223:0;sudo mount /dev/sda /mnt/temp_btrfs_check
-: 1761424416:0;pidof openrgb
-: 1761424419:0;pkill openrgb
-: 1761424499:0;sudo nixos-rebuild switch
-: 1761424649:0;which polkit-agent-helper-1
-: 1761424658:0;polkit-agent-helper-1 &
-: 1761424665:0;/run/wrappers/bin/polkit-agent-helper-1 &
-: 1761424673:0;polkit-agent-helper-1
-: 1761424717:0;/run/current-system/sw/libexex/polkit-gnome-authentication-agent-1
-: 1761424768:0;polkit-agent-helper
-: 1761424769:0;polkit-agent-helper-1
-: 1761424773:0;polkit-agent-helper-1 --help
-: 1761424788:0;polkit-kde-agent
-: 1761424804:0;polkit-agent-helper-1
-: 1761424829:0;journalctl -b | grep polkit
-: 1761424857:0;polkit-agent-helper-1
-: 1761424885:0;gnome.gnome-polkit
-: 1761424927:0;# This will show the actual executable path in the Nix store:\
+sudo nixos-rebuild switch
+ls
+cd /mnt
+cd temp_btrfs_check
+ls
+lsblk -f
+sudo mount sda /mnt/temp_btrfs_check
+sudo mount /dev/sda /mnt/temp_btrfs_check
+pidof openrgb
+pkill openrgb
+sudo nixos-rebuild switch
+which polkit-agent-helper-1
+polkit-agent-helper-1 &
+/run/wrappers/bin/polkit-agent-helper-1 &
+polkit-agent-helper-1
+/run/current-system/sw/libexex/polkit-gnome-authentication-agent-1
+polkit-agent-helper
+polkit-agent-helper-1
+polkit-agent-helper-1 --help
+polkit-kde-agent
+polkit-agent-helper-1
+journalctl -b | grep polkit
+polkit-agent-helper-1
+gnome.gnome-polkit
+# This will show the actual executable path in the Nix store:\
 readlink -f $(which polkit-kde-authentication-agent-1)
-: 1761424957:0;/run/current-system/sw/bin/polkit-kde-authentication-agent-1 &
-: 1761424989:0;nix-store -q --realize $(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1
-: 1761425008:0;$(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1 &
-: 1761425035:0;(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1 &
-: 1761425042:0;$(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1 &
-: 1761425058:0;$(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/libexec/polkit-kde-authentication-agent-1 &
-: 1761425102:0;sudo nixos-rebuild switch
-: 1761425235:0;fchat-horizon
-: 1761425260:0;pass f-list.net
-: 1761425324:0;ps aux | grep -E 'gnome-keyring-daemon|kwalletd|secretservice|keepassxc'
-: 1761425355:0;fchat-horizon --add-flags "--password-store=gnome-libsecret" 
-: 1761425416:0;sudo nixos-rebuild switch
-: 1761425490:0;swaymsg exit
-: 1761425672:0;journalctl -f
-: 1761431772:0;/home/moonburst/.config/sherlock/scripts/sherlock-clp | sherlock | cliphist decode | wl-copy
-: 1761431796:0;/home/moonburst/.config/sherlock/scripts/sherlock-clp | sherlock | xargs -r cliphist decode | wl-copy
-: 1761431809:0;swaymsg reload
-: 1761435534:0;nix-store --query --requisites
-: 1761435550:0;1time fastfetch
-: 1761435593:0;nix-store --query --requisites /run/current-system \\
+/run/current-system/sw/bin/polkit-kde-authentication-agent-1 &
+nix-store -q --realize $(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1
+$(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1 &
+(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1 &
+$(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/bin/polkit-kde-authentication-agent-1 &
+$(nix-build '<nixpkgs>' -A kdePackages.polkit-kde-agent-1 --no-out-link)/libexec/polkit-kde-authentication-agent-1 &
+sudo nixos-rebuild switch
+fchat-horizon
+pass f-list.net
+ps aux | grep -E 'gnome-keyring-daemon|kwalletd|secretservice|keepassxc'
+fchat-horizon --add-flags "--password-store=gnome-libsecret" 
+sudo nixos-rebuild switch
+swaymsg exit
+journalctl -f
+/home/moonburst/.config/sherlock/scripts/sherlock-clp | sherlock | cliphist decode | wl-copy
+/home/moonburst/.config/sherlock/scripts/sherlock-clp | sherlock | xargs -r cliphist decode | wl-copy
+swaymsg reload
+nix-store --query --requisites
+1time fastfetch
+nix-store --query --requisites /run/current-system \\
 | grep -v 'nixos-system' \\
 | cut -d- -f2- \\
 | grep '([0-9]{1,}\.)+[ 0-9]{1,}' \\
 | grep -v '\-doc$|\-man$|\-info$|\-dev$|\-bin$' \\
 | sort -u \\
 | wc -l
-: 1761435612:0;nix-store --query --requisites /run/current-system \\
+nix-store --query --requisites /run/current-system \\
 | cut -d- -f2- \\
 | grep -v 'nixos-system-nixos-' \\
 | grep -E '([0-9]{1,}\.)+[0-9]{1,}' \\
 | grep -vE '\-(doc|man|info|dev|bin)$' \\
 | sort -u \\
 | wc -l
-: 1761435771:0;watch fastfetch
-: 1761437277:0;./scripts/github/github-updater.sh
+watch fastfetch
+./scripts/github/github-updater.sh
+journalctl -f
+1time parttition-manager
+1time partition-manager
+1time partitionmanager
+lsblk -f
+1time kdePackages.partitionmanager
+nix-shell -p kdePackages.partitionmanager
+kdePackages.partitionmanager
+partitionmanager
+nix-shell -p pmsfdiskbackendplugin
+ -p pmsfdiskbackendplugin
+partitionmanager
+man configuration.nix
+journalctl -f
+man configuration.nix
+sudo nixos-rebuild switch
+systemctl start --user polkit-gnome-authentication-agent-1 &
+systemctl start --user plasma-polkit-agent.service
+which plasa-polkit-agent
+journalctl -f
+echo $HOST
+cd nixos-config
+mkdir modules/common
+mkdir modules
+cd modules
+mkdir common
+cd common
+nano default.nix
+1time xrgears
+1time xeyes
+cd ..
+mkdir hosts
+cd hosts
+mkdir desktop
+cd desktop
+nano default.nix
+cd ,,'
+cd ..
+mkdir laptop
+cd laptop
+nano default.nix
+ssh moonburst@192.168.12.245
+cd .ssh
+nano known_hosts
+ssh moonburst@192.168.12.245
+cd nixos-config/modules/
+nano laptop-hardware.nix
+cd ..
+cat hardware-configuration.nix
+cd modules
+nano desktop-hardware.nix
+lsblk -f
+cd /mnt
+ls
+mkdir usb
+sudo mkdir usb
+sudo mount /dev/sdc1 /mnt/usb
+cd usb
+mkdir config
+sudo mkdir config
+ls
+sudo cp ~/nixos-config /mnt/usb/config
+sudo cp -r ~/nixos-config /mnt/usb/config
+ls
+cd ..
+cd ~/
+sudo nixos-rebuild switch
+ssh moonburst@192.168.12.245
+mkdir ~/remote_folder
+sshfs moonburst192.168.12.245:~/ ~/remote_folder
+sudo nixos-rebuild switch
+echo $HOST
+fastfetch --structure title:separator:os:kernel:uptime:packages
+watch fastfetch --structure title:separator:os:kernel:uptime:packages
+git add hosts/desktop/default.nix\
+git commit -m "Fixed duplicate package definition and cron job paths in desktop module."\
+sudo nixos-rebuild switch --flake .#moonbeauty
+cd nixos-config
+git add hosts/desktop/default.nix\
+git commit -m "Fixed duplicate package definition and cron job paths in desktop module."\
+sudo nixos-rebuild switch --flake .#moonbeauty
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git add flake.nix
+git commit -m "Initial commit of flake.nix."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git commit -am "Wrap flake.nix content in curly braces to fix syntax."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git commit -am "Final fix: resolved module path and duplicate package definition errors."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git add modules/common/default.nix
+git commit -m "Added common module to Git tracking."
+git add .\
+git commit -m "Final cleanup of all remaining uncommitted files."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git commit -am "Final syntax cleanup in common module and package concatenation in desktop module."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git commit -am "Fixed final syntax error in desktop module by removing extraneous parenthesis."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git commit -am "Final syntax cleanup and package merge for desktop module."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git commit -am "Final syntax correction: merged package lists and added all missing semicolons to common module."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+sudo blkid
+git commit -am "Added mandatory fileSystems definition for moonbeauty desktop."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git add modules/desktop-hardware.nix hosts/desktop/default.nix\
+git commit -m "Moved hardware and fileSystems configuration into dedicated desktop-hardware.nix."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git commit -am "Fixed final infinite recursion error in desktop environment.systemPackages."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git commit -am "Removed missing package 'fchat-horizon' from common packages."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+git commit -am "Removed missing package 'moon-burst-theme' from common packages."
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+cd nixos-config
+nano modules/laptop-hardware.nix
+echo $HOST
+git add .\
+git commit -m "Finalized common module fixes and added lunarchild host configuration."
+git push
+pass github.com
+ssh moonburst@192.168.12.245
+pass github.com
+ssh moonburst@192.168.12.245
+ls
+ssh moonburst@192.168.12.245
+lsblk -f
+ssh moonburst@192.168.12.245
+/usr/bin/
+ls
+cd env
+ls
+lsblk -f
+reboot
+vivaldi
+swaymsg exit
+vivaldi
+1time firefox
+cd /tmp
+rm *
+rm * -y
+ls
+rm *
+sudo rm *
+ls
+vivaldi
+1time firefox
+cd .config/vivaldi
+rm SingletonLock
+vivaldi
+journalctl -b -1
+journalctl -b -1 | grep "amdgpu"
+sudo journalctl -k -r | grep amdgpu
+sudo journalctl -b -1 -k -p err | grep amdgpu
+sudo journalctl -b -1 -k
+nixos-rebuild list-generations
+journalctl --list-boots
+reboot
+lsblk 0f
+lsblk -f
+sudo nixos-rebuild switch
+sudo nixos-rebuild switch --flake .#moonbeauty
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+sudo find / -name "flake.nix" 2>/dev/null
+sudo nixos-rebuild switch --flake '/home/moonburst/nixos-config#moonbeauty'
+reboot now
+d .config/fastfetch
+cd .config/fastfetch
+watch ./fastfetch.sh
+echo $hostname
+echo $HOST
+cd .config/zsh
+cat .zshrc
+./$XDG_CONFIG_HOME/fastfetch/fastfetch.sh
+$XDG_CONFIG_HOME/fastfetch/fastfetch.sh
+watch $XDG_CONFIG_HOME/fastfetch/fastfetch.sh
+fastfetch
+git tag new-head\
+git checkout HEAD~20\
+git tag junction\
+git checkout --orphan=new-root\
+git commit -m "new initial commit"\
+git rebase --onto=new-root junction new-head\
+git checkout -b new-main
+cd nixos-config
+git tag new-head\
+git checkout HEAD~20\
+git tag junction\
+git checkout --orphan=new-root\
+git commit -m "new initial commit"\
+git rebase --onto=new-root junction new-head\
+git checkout -b new-main
+git reset --hard HEAD-20
+git revert --no-commit HEAD~20..HEAD
+git reset --hard HEAD~20
+git reset --hard HEAD~20 && git push --force-with-lease origin main
+git log --oneline
+git reset --hard <commit-hash> && git push --force-with-lease origin main
+git log --oneline\
+
+git reset --hard ae3e6ce9c41b17f2800db0b9572298feac674798 && git push --force-with-lease origin main\
+
+git push --force origin main
+git branch temp-save
+git push --force origin <commit-hash>:main\
+
+ssh moonburst@192.168.12.245
+sudo nixos-rebuild switch --flake '/home/moonburst/nixos-config#moonbeauty'
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+ssh moonburst@192.168.12.245
+cd nixos-config
+Command,Action\
+git fetch origin,Downloads the changes from GitHub.\
+git reset --hard origin/main,DISCARDS ALL LOCAL CHANGES (committed and uncommitted) and makes your working directory identical to the remote branch.
+git fetch origin
+git reset --hard origin/main
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+cd nixos-config
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+reboot
+nixos-option hardware.enableRedistributableFirmware
+cd nixos-config
+cat flake.nix
+nix flake update
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+reboot
+lsblk -f
+cd nixos-config
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+reboot
+journalctl --list-boots
+journalctl -b -1
+journalctl -b -1 -p err..crit
+dmesg -k -b -1
+journalctl -b -1 -p err..crit
+sudo nix-channel --list
+uname -a
+cd nixos-config
+sudo nixos-rebuild switch --flake '.#moonbeauty'
+reboot
+: 1761567534:0;journalctl -f
+: 1761572546:0;cd nixos-config
+: 1761572548:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761572607:0;reboot
+: 1761572806:0;cd nixos-config
+: 1761572808:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761572834:0;reboot
+: 1761573037:0;lsblk -f
+: 1761573410:0;cd nixos-config
+: 1761573412:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761573964:0;cd /tmp
+: 1761573978:0;mamp temp-hardware.nix
+: 1761573986:0;nano temp-hardware.nix
+: 1761574004:0;# This copies the clean file over your configuration file\
+sudo cp /tmp/temp-hardware.nix ~/nixos-config/modules/desktop-hardware.nix
+: 1761574015:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761580226:0;man nixos-rebuild
+: 1761584169:0;cd nixos-config
+: 1761584245:0;zip config.zip flake.nix hosts/ modules 
+: 1761584323:0;mkdir test
+: 1761584327:0;mv config.zip test
+: 1761584329:0;cd test
+: 1761584332:0;unzip config.zip
+: 1761584341:0;cd ..
+: 1761584356:0;zip -r config.zip flake.nix hosts/ modules 
+: 1761584380:0;rm -r test
+: 1761585033:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761588393:0;lsblk -f
+: 1761588449:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761588906:0;reboot
+: 1761589213:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761589222:0;cd nixos-config
+: 1761589223:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761589243:0;reboot
+: 1761589414:0;cd nixos-config
+: 1761589416:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761589479:0;reboot
+: 1761590029:0;cd nixos-config
+: 1761590031:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761590088:0;reboot
+: 1761590498:0;cd nixos-config
+: 1761590500:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761591042:0;cd /etc/nixos
+: 1761591046:0;cd flake_programs
+: 1761591095:0;cd ..
+: 1761591182:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761591357:0;nix flake lock --update-input nixpkgs
+: 1761591362:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761591630:0;git add .
+: 1761591634:0;git commit -m "Resolve file path error by committing flake_programs directory"
+: 1761591644:0;sudo nixos-rebuild switch --flake '.#moonbeauty
+: 1761591645:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761591737:0;tree
+: 1761591739:0;1time tree
+: 1761591780:0;# 1. Stage all untracked and modified files\
+git add .\
+\
+# 2. Commit the changes, creating a clean snapshot\
+git commit -m "Final commit: all modules and assets tracked for flake build"
+: 1761591785:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761591860:0;reboot
+: 1761592104:0;cd nixos-config
+: 1761592130:0;# 1. Stage all untracked and modified files\
+git add .\
+\
+# 2. Commit the changes, creating a clean snapshot\
+git commit -m "All things are good. Do cleanup later."
+: 1761592197:0;cd nixos-config
+: 1761592202:0;rm config.zip
+: 1761592209:0;ls Custom\ flakes,\ deal\ with\ later.
+: 1761592216:0;rm -rf Custom\ flakes,\ deal\ with\ later.
+: 1761592220:0;ls
+: 1761592279:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761592513:0;1time tree
+: 1761592545:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761592570:0;# 1. Stage all changes (the move of mounts.nix, and the update to default.nix)\
+git add .\
+\
+# 2. Commit the staged changes\
+git commit -m "Finalizing file moves and path updates to resolve build errors"
+: 1761592577:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761592615:0;git push
+: 1761592627:0;git push origin main
+: 1761592666:0;git pull origin main
+: 1761592671:0;git push origin main
+: 1761592736:0;# Downloads the history without merging anything\
+git fetch origin\
+\
+# Reports the exact status: how far ahead or behind your local branch is\
+git status
+: 1761592743:0;# 1. Rebase your local commits onto the remote 'main' branch\
+#    This integrates the remote changes first, then applies your local changes.\
+git rebase origin/main
+: 1761592746:0;# 2. Push the newly synchronized commits to GitHub\
+#    This should succeed now because your branch is no longer "behind."\
+git push origin main
+: 1761592785:0;git checkout main
+: 1761592790:0;git pull
+: 1761592850:0;git checkout main && git pull origin main && git merge new-main && git push origin main
+: 1761592870:0;cd ~/nixos-config
+: 1761592873:0;git checkout main && git pull origin main && git merge new-main && git push origin main
+: 1761592898:0;sudo nixos-rebuild switch --flake '.#moonbeauty'
+: 1761592908:0;reboot
+: 1761593027:0;./scripts/github/github-updater.sh
