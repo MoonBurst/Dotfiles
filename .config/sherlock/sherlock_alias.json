@@ -1,0 +1,15 @@
+{
+    "VLC media player": {
+        "name": "VLC Player"
+    },
+    "Tweaks": {
+        "name": "GTK Settings",
+        "icon": "settings"
+    },
+    "Vesktop": {
+        "name": "Discord",
+        "icon": "discord",
+        "exec": "/run/current-system/sw/bin/vesktop --disable-gpu-memory-buffer-video-frames",
+        "keywords": "discord"
+    }
+}

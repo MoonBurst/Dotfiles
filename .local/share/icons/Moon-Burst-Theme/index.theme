@@ -1,0 +1,24 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Moon-Burst-Theme
+Comment=
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+Name=Moon-Burst-Theme
+GtkTheme=Moon-Burst-Theme
+IconTheme=Moon-Burst-Theme
+MetacityTheme=Moon-Burst-Theme
+
+[cursors]
+Directory=cursors
+Size=24
+Context=Cursor
+Type=Xcursor
+
+
+[Icon Theme]
+Name=Night-Diamond-Blue
+Comment=Night Diamond Blue Cursor Theme
+Inherits=default
+Size=24  
