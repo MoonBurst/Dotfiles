@@ -26,13 +26,14 @@
             "type": "custom",
             "format": "\u001b[32m┌─Hardware────────────────────────────────────────────┐\u001b[0m"
         },
-        		{
-    "type": "custom",
-    "format": "\u001b[32m     System:\u001b[0m \u001b[34m             MoonBurst@Nixos\u001b[0m"
-		},
+                {
+            "type": "title",
+            "key": " ┌ System             ",
+            "keyColor": "green"
+        },
 		{
 			"type": "command",
-			"key": " ┌ CPU                ",
+			"key": " ├ CPU                ",
 			"keyColor": "green",
 			"text": "lscpu | grep \"Model name\" | awk -F': ' '{print $2}' | sed 's/Processor//' | xargs"
 		},
