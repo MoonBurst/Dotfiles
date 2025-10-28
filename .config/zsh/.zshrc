@@ -149,6 +149,25 @@ if [ "$#" -eq 0 ]; then
 }
 
 
-# --- 9. Prompt Setting (should be near the very end) ---
+update-profile() {
+
+local HOSTNAME
+  HOSTNAME=$(hostname)
+  local FLAKE_PATH="/home/moonburst/nixos-config"
+
+  if [ -d "$FLAKE_PATH" ]; then
+    echo "Building system: $HOSTNAME from $FLAKE_PATH"
+
+    sudo nixos-rebuild switch --flake "$FLAKE_PATH"\#"$HOSTNAME"
+  else
+    echo "Error: Flake path not found at $FLAKE_PATH" >&2
+    return 1
+  fi
+}
+
+
+
+
+
 $XDG_CONFIG_HOME/fastfetch/fastfetch.sh
-PROMPT="%{$fg[yellow]%}[%D{%T}] %{$fg[blue]%}moonburst@nixos: %{$fg[green]%}%~%{$reset_color%} $"
+PROMPT="%{$fg[yellow]%}[%D{%T}] %{$fg[blue]%}moonburst@%m: %{$fg[green]%}%~%{$reset_color%} $"
