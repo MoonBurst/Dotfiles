@@ -36,26 +36,37 @@ if [ ! -d "$GIT_DIR_PATH" ]; then
 else
     export GIT_WORK_TREE="$HOME"
     export GIT_DIR="$GIT_DIR_PATH"
+
+    # CRITICAL FIX: Ensure the bare repo configuration is active for this session.
+    # This prevents Git from thinking every single file in $HOME is untracked.
+    git config status.showUntrackedFiles no 
     
     echo "Staging files for bare repository..."
-    STAGED_ANYTHING=false
+    
+    # Stage all files listed in DIRECTORIES
     for RELATIVE_PATH in "${DIRECTORIES[@]}"; do
         FULL_PATH="$HOME/$RELATIVE_PATH"
         if [ -e "$FULL_PATH" ]; then
             git add --force "$RELATIVE_PATH"
-            STAGED_ANYTHING=true
         else
-            echo "Path $FULL_PATH does not exist, skipping..."
+            # Path skipping messages are already logged in previous runs, keeping log clean here.
+            :
         fi
     done
 
+    # --- New Logic: Check if anything was actually staged ---
+    # git diff --quiet --exit-code --cached checks if the index (staged area) differs from HEAD.
     if git diff --quiet --exit-code --cached; then
         echo "No changes detected in dotfiles repo, skipping commit/push."
     else
         echo "Changes detected and staged. Committing..."
-        if git commit -m "Automated dotfiles sync: $(date)" > /dev/null 2>&1; then
+        # We rely on the staged check above, so we can commit directly
+        if git commit -m "Automated dotfiles sync: $(date)"; then
             echo "Changes committed. Pushing to GitHub..."
+            # Note: We do not pipe output to /dev/null on commit so we can see what was committed.
             git push origin "$PUSH_BRANCH"
+        else
+            echo "Error during commit. Check staged files manually."
         fi
     fi
 
@@ -75,7 +86,8 @@ echo "================== Syncing NixOS Config Repo =================="
         echo "No changes detected in NixOS repo, skipping commit/push."
     else
         echo "Changes detected and staged. Committing..."
-        if git commit -m "Automated NixOS sync: $(date)" > /dev/null 2>&1; then
+        # Removed piping to /dev/null so you can see commit details if successful
+        if git commit -m "Automated NixOS sync: $(date)"; then
             echo "Changes committed. Pushing to GitHub..."
             git push origin "$PUSH_BRANCH"
         fi
