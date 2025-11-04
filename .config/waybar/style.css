@@ -59,7 +59,7 @@ box {
   background-color: @red;
   color: @text;
 }
-
+.niri-taskbar,
 #battery,
 #bluetooth,
 #clock,

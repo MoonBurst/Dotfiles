@@ -12,6 +12,8 @@
     "modules-left": [
 //    "sway/workspaces", 
 //    "hyprland/workspaces", 
+//"niri/workspaces",
+  "cffi/niri-taskbar",
     "idle_inhibitor",
 //    "custom/beats",
     "clock#day",
@@ -21,18 +23,6 @@
     "mpris"
     ],
 	
-	
-	
-//	"modules-center": [
-//	"custom/test1",
-//	"custom/test2",
-//	"custom/test3",
-//	"custom/test4",
-//	"custom/test5",
-//	"custom/test6",
-//	"custom/test7",
-//	"custom/test8"
-//	],
 	
 	
 	"modules-right": [
@@ -249,5 +239,37 @@
   "exec": "~/.config/waybar/modules/dunst_count.sh",
   "interval": 0,
   "on-click": "dunstctl set-paused toggle"
+},
+"wlr/taskbar": {
+    "format": "{icon}",
+     "icon-theme": "hicolor", 
+    "icon-size": 21,
+    "tooltip": true,
+    "on-click": "activate" 
+},
+"niri/workspaces": {
+	"format": "{icon}",
+	"format-icons": {
+		// Named workspaces
+		// (you need to configure them in niri)
+		"browser": "",
+		"discord": "",
+		"chat": "<b></b>",
+		// Icons by state
+		"active": "",
+		"default": ""
+	}
+},
+"cffi/niri-taskbar": {
+        "module_path": "/home/moonburst/.config/waybar/libniri_taskbar.so",
+        "format": "{icon} {title}",
+        
+"format-icons": {
+            // Self-map the icon name
+            "fchat-horizon": "/home/moonburst/.local/share/icons/hicolor/256x256/apps/horizon-5.png",
+            
+            // Add a default for safety
+            "default": "application-default-icon"
+    }
 }
 }
